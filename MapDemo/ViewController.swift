@@ -74,11 +74,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 }
 public class CameraLocationConsumer: LocationConsumer {
     weak var mapView: MapView?
-     
     init(mapView: MapView) {
         self.mapView = mapView
     }
-     
     public func locationUpdate(newLocation: Location) {
         mapView?.camera.ease(to: CameraOptions(center: newLocation.coordinate, zoom: 15, pitch: 45),duration: 1.3)
     }
