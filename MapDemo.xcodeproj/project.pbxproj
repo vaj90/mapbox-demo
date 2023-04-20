@@ -21,6 +21,7 @@
 		9F2CD58C29F024AD00239067 /* MapboxMaps.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2CD58329F024AB00239067 /* MapboxMaps.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F2CD58D29F024AD00239067 /* Turf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2CD58429F024AC00239067 /* Turf.xcframework */; };
 		9F2CD58E29F024AD00239067 /* Turf.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2CD58429F024AC00239067 /* Turf.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9F2CD59229F1112300239067 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2CD59129F1112300239067 /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		9F2CD58229F024AB00239067 /* MapboxMobileEvents.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxMobileEvents.xcframework; path = ../../../Downloads/artifacts/MapboxMobileEvents.xcframework; sourceTree = "<group>"; };
 		9F2CD58329F024AB00239067 /* MapboxMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxMaps.xcframework; path = ../../../Downloads/artifacts/MapboxMaps.xcframework; sourceTree = "<group>"; };
 		9F2CD58429F024AC00239067 /* Turf.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Turf.xcframework; path = ../../../Downloads/artifacts/Turf.xcframework; sourceTree = "<group>"; };
+		9F2CD59129F1112300239067 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				9F2CD56B29EEFE4D00239067 /* AppDelegate.swift */,
+				9F2CD59029F110EA00239067 /* Model */,
 				9F2CD56F29EEFE4D00239067 /* ViewController.swift */,
 				9F2CD57429EEFE5000239067 /* Assets.xcassets */,
 				9F2CD57629EEFE5000239067 /* LaunchScreen.storyboard */,
@@ -110,6 +113,14 @@
 				9F2CD58429F024AC00239067 /* Turf.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F2CD59029F110EA00239067 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9F2CD59129F1112300239067 /* Location.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F2CD57029EEFE4D00239067 /* ViewController.swift in Sources */,
+				9F2CD59229F1112300239067 /* Location.swift in Sources */,
 				9F2CD56C29EEFE4D00239067 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

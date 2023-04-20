@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import MapboxMaps
+
 class ViewController: UIViewController, CLLocationManagerDelegate {
     internal var mapView: MapView!
     var locationManager: CLLocationManager!
@@ -28,8 +29,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         setUpMap();
     }
-    func fillDirection(){
-        
+    func fillDirection(at locations: [DataLocation]){
+        let pointAnnotationManager = mapView.annotations.makePointAnnotationManager()
+        var pointAnnotations: [PointAnnotation] = []
+        for location in locations {
+            let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            var pointAnnotation = PointAnnotation(coordinate: coordinate)
+            pointAnnotation.image = .init(image: UIImage(named: "marker")!, name: "marker")
+            pointAnnotation.iconAnchor = .bottom
+            pointAnnotation.textField = location.address
+            pointAnnotations.append(pointAnnotation)
+        }
+        pointAnnotationManager.annotations = pointAnnotations
     }
     func setUpMap(){
         let options = MapInitOptions(resourceOptions: resourceOptions, styleURI: .light)
