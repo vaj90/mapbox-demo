@@ -54,6 +54,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             self.mapView.location.addLocationConsumer(newConsumer: self.cameraLocationConsumer)
             self.addMarker(at: centerCoordinate)
             self.addViewAnnotation(at: centerCoordinate)
+            self.locationsDemo()
         }
     }
     //updating current coordinate.
@@ -61,6 +62,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if let location = locations.last {
             centerCoordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         }
+    }
+    
+    func locationsDemo(){
+        var locations: [DataLocation] = []
+        locations.append(
+            contentsOf: [
+                DataLocation(address: "Riverdale Park", latitude: 43.669827, longitude: -79.355428),
+                DataLocation(address: "High Park", latitude: 43.645485, longitude: -79.464752),
+                DataLocation(address: "Toronto Zoo", latitude: 43.818830058, longitude: -79.176332628)
+            ]
+        )
+        self.fillDirection(at: locations)
     }
     //adding marker
     func addMarker(at coordinate: CLLocationCoordinate2D) -> Void {
@@ -94,6 +107,6 @@ public class CameraLocationConsumer: LocationConsumer {
         self.mapView = mapView
     }
     public func locationUpdate(newLocation: Location) {
-        mapView?.camera.ease(to: CameraOptions(center: newLocation.coordinate, zoom: 15, pitch: 45),duration: 1.3)
+        mapView?.camera.ease(to: CameraOptions(center: newLocation.coordinate, zoom: 18, pitch: 45),duration: 1.3)
     }
 }
