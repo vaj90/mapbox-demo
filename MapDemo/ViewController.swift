@@ -17,6 +17,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var resourceOptions = ResourceOptions(accessToken: "pk.eyJ1IjoiYmxvY2VzdGF0ZTEiLCJhIjoiY2xjeXd6aW40MDAwbzNxbzQ4a2xzMXQ2biJ9.wOAZ-fxbPhXhLouH7uFpcA")
     override func viewDidLoad() {
         super.viewDidLoad()
+        //access permission for location
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -44,23 +45,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             self.addViewAnnotation(at: centerCoordinate)
         }
     }
+    //updating current coordinate.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             centerCoordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         }
     }
+    //adding marker
     func addMarker(at coordinate: CLLocationCoordinate2D) -> Void {
         var pointAnnotation = PointAnnotation(coordinate: coordinate)
         pointAnnotation.image = .init(image: UIImage(named: "marker")!, name: "marker")
         let pointAnnotationManager = mapView.annotations.makePointAnnotationManager()
         pointAnnotationManager.annotations = [pointAnnotation]
     }
-    
+    //adding details
     func addViewAnnotation(at coordinate: CLLocationCoordinate2D) {
         let options = ViewAnnotationOptions( geometry: Point(coordinate),width: 100,height: 40,anchor: .bottom,offsetY: 40)
         let sampleView = createSampleView(withText: "Current Location!")
         try? mapView.viewAnnotations.add(sampleView, options: options)
     }
+    //creating label for annotation
     private func createSampleView(withText text: String) -> UIView {
         let label = UILabel()
         label.text = text
@@ -72,6 +76,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         return label
     }
 }
+//location updates
 public class CameraLocationConsumer: LocationConsumer {
     weak var mapView: MapView?
     init(mapView: MapView) {
