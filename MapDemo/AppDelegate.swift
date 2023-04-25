@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
 
-        let welcomePage = ViewController()
+        let welcomePage = AgeInfoController()
         let navigationControler = UINavigationController(rootViewController: welcomePage)
         window?.rootViewController = navigationControler
         return true

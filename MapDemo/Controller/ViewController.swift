@@ -31,7 +31,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     func fillDirection(at locations: [DataLocation]){
         let pointAnnotationManager = mapView.annotations.makePointAnnotationManager()
+        let lineAnnnotationManager = mapView.annotations.makePolylineAnnotationManager()
         var pointAnnotations: [PointAnnotation] = []
+        var coordinates: [CLLocationCoordinate2D] = []
         for location in locations {
             let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             var pointAnnotation = PointAnnotation(coordinate: coordinate)
@@ -39,8 +41,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             pointAnnotation.iconAnchor = .bottom
             pointAnnotation.textField = location.address
             pointAnnotations.append(pointAnnotation)
+            coordinates.append(coordinate)
         }
         pointAnnotationManager.annotations = pointAnnotations
+
+        /*var lineAnnotation = PolylineAnnotation(lineCoordinates:coordinates)
+        lineAnnotation.lineColor = StyleColor(.red)
+        lineAnnnotationManager.annotations = [lineAnnotation]*/
     }
     func setUpMap(){
         let options = MapInitOptions(resourceOptions: resourceOptions, styleURI: .light)
