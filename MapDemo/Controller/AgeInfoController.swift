@@ -8,11 +8,9 @@ import UIKit
 
 class AgeInfoController: UIViewController {
     
-
     var headerLabel : UILabel = {
         let label = UILabel()
         label.textColor = UIColor.init(hexString: "#1D82D6")
-        //label.font = UIFont(name: "Ubuntu-Bold", size: 20)
         label.textAlignment = .center
         let attrNormalText = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Light", size: 24)];
         let attrBoldText = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Bold", size: 24)];
@@ -35,7 +33,7 @@ class AgeInfoController: UIViewController {
         headerLabel.anchor(
             top: v.topAnchor, left: v.leftAnchor,
             bottom: nil, right: v.rightAnchor,
-            paddingTop: 20, paddingLeft: 10,
+            paddingTop: 40, paddingLeft: 10,
             paddingBottom: 0, paddingRight: 10,
             width: 0, height: 0)
         v.backgroundColor = .white
@@ -49,26 +47,37 @@ class AgeInfoController: UIViewController {
         let img = UIImage(named:"left-arrow")?.withRenderingMode(.alwaysTemplate)
         var imgV = UIImageView(image: img!)
         imgV.tintColor = .white
-        let tap = UITapGestureRecognizer(target: self, action: #selector(goBack))
-        imgV.addGestureRecognizer(tap)
+        //imgV.backgroundColor = .red
+        
+        let tapImg =  UITapGestureRecognizer(target: self, action: #selector(goBack))
+        imgV.addGestureRecognizer(tapImg)
         imgV.isUserInteractionEnabled = true
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "2/8"
+        
+        let lblStep = UILabel()
+        lblStep.textColor = .white
+        lblStep.text = "2/8"
+        lblStep.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        lblStep.textAlignment = .center
+        //lblStep.backgroundColor = .green
+        
+        let tapSkip = UITapGestureRecognizer(target: self, action: #selector(goSkip))
+        lblStep.addGestureRecognizer(tapSkip)
+        lblStep.isUserInteractionEnabled = true
+        
         v.addSubview(imgV)
-        v.addSubview(label)
+        v.addSubview(lblStep)
         imgV.anchor(
-            top: v.topAnchor, left: v.leftAnchor,
-            bottom: nil, right: nil,
-            paddingTop: 6, paddingLeft: 15,
-            paddingBottom: 0, paddingRight: 0,
-            width: 0, height: 0)
-        label.anchor(
-            top: v.topAnchor, left: nil,
-            bottom: nil, right: v.rightAnchor,
-            paddingTop: 12, paddingLeft: 0,
-            paddingBottom: 0, paddingRight: 15,
-            width: 0, height: 0)
+            top: nil, left: v.leftAnchor,
+            bottom: v.bottomAnchor, right: nil,
+            paddingTop: 0, paddingLeft: 15,
+            paddingBottom: 5, paddingRight: 0,
+            width: 32, height: 32)
+        lblStep.anchor(
+            top: nil, left: nil,
+            bottom: v.bottomAnchor, right: v.rightAnchor,
+            paddingTop: 0, paddingLeft: 0,
+            paddingBottom: 5, paddingRight: 15,
+            width: 32, height: 32)
 
         v.backgroundColor =  UIColor.init(hexString: "#1D82D6")
         v.layer.cornerRadius = 20
@@ -80,7 +89,7 @@ class AgeInfoController: UIViewController {
     lazy var bottomNav: UIView = {
         let v  = UIView()
         let lblSkip = UILabel()
-        lblSkip.textColor = .white
+        lblSkip.textColor = UIColor.init(hexString: "#68B2F0")
         lblSkip.text = "SKIP"
         lblSkip.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
         let tapSkip = UITapGestureRecognizer(target: self, action: #selector(goSkip))
@@ -101,20 +110,20 @@ class AgeInfoController: UIViewController {
             top: nil, left: v.leftAnchor,
             bottom: v.bottomAnchor, right: nil,
             paddingTop: 0, paddingLeft: 20,
-            paddingBottom: 15, paddingRight: 0,
+            paddingBottom: 20, paddingRight: 0,
             width: 0, height: 0)
         lblNext.anchor(
             top: nil, left: nil,
             bottom: v.bottomAnchor, right: v.rightAnchor,
             paddingTop: 0, paddingLeft: 0,
-            paddingBottom: 15, paddingRight: 20,
+            paddingBottom: 20, paddingRight: 20,
             width: 0, height: 0)
 
         v.backgroundColor =  UIColor.init(hexString: "#1D82D6")
         v.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
         return v
     }()
-    func createNavBar(){
+    /*func createNavBar(){
         let leftImage = UIImage(named: "left-arrow")
         let leftBtnItem = UIBarButtonItem(image: leftImage, style: .plain, target: self, action: #selector(goBack))
         let rightBtnItem = UIBarButtonItem(title: "2/8", style: .plain, target: self, action: nil)
@@ -127,46 +136,43 @@ class AgeInfoController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
-    }
+    }*/
     func setUpView(){
         let height = navigationController?.navigationBar.frame.maxY
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = true
+        
         view.addSubview(topNav)
         topNav.anchor(
             top: view.topAnchor, left: view.leftAnchor,
             bottom: nil, right: view.rightAnchor,
             paddingTop: 50, paddingLeft: 0,
-            paddingBottom: 44, paddingRight: 0,
-            width: 0, height: height?.native ?? 44)
-        view.addSubview(bottomNav)
+            paddingBottom: 0, paddingRight: 0,
+            width: 0, height: /*height?.native ??*/ 44)
         
+        view.addSubview(bottomNav)
         bottomNav.anchor(
             top: nil, left: view.leftAnchor,
             bottom: view.bottomAnchor, right: view.rightAnchor,
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
-            width: 0, height: 55)
+            width: 0, height: 65)
         
         view.addSubview(viewBody)
         viewBody.anchor(
             top: topNav.bottomAnchor, left: topNav.leftAnchor,
             bottom: bottomNav.topAnchor, right: topNav.rightAnchor,
-            paddingTop: -15
-            , paddingLeft: 0,
+            paddingTop: -15, paddingLeft: 0,
             paddingBottom: -15, paddingRight: 0,
             width: 0, height: 0)
 
     }
     
     @objc private func goBack(){
-        //let infoController = IntroInfoController()
-       // self.navigationController?.popViewController(animated: true )
-        print("tapped")
+       self.navigationController?.popViewController(animated: true )
     }
     @objc private func goNext(){
-        //let infoController = IntroInfoController()
-       // self.navigationController?.popViewController(animated: true )
-        print("next")
+        let nextController = SearchController()
+       self.navigationController?.pushViewController(nextController, animated: true )
     }
     @objc private func goSkip(){
         //let infoController = IntroInfoController()
