@@ -29,6 +29,23 @@ class SearchController: UIViewController {
         label.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
         return label
     }()
+    var lblBuyLV : UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.text = "$0"
+        label.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        return label
+    }()
+    var lblBuyHV : UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.text = "$5000"
+        label.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        return label
+    }()
+    
     
     
     var headerLabel : UILabel = {
@@ -53,15 +70,12 @@ class SearchController: UIViewController {
         let width = v.frame.size.width
         print(width)
         let rentSlider: RangeSlider = RangeSlider(frame: CGRect(x: 0, y: 10, width: 350 , height: 20))
-        rentSlider.addTarget(self, action: #selector(onChangeValue(sender:)), for: .valueChanged)
+        rentSlider.addTarget(self, action: #selector(onChangeValueRent(sender:)), for: .valueChanged)
         rentSlider.minimumValue = 0
         rentSlider.lowerValue = 0
         rentSlider.upperValue = 5000
         rentSlider.maximumValue = 10000
         rentSlider.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
         
         v.addSubview(lblrent)
         lblrent.anchor(
@@ -95,6 +109,63 @@ class SearchController: UIViewController {
             width: 0, height: 0)
         lblRentHV.anchor(
             top: rentSlider.bottomAnchor, left: nil,
+            bottom: nil, right: v.rightAnchor,
+            paddingTop: 0, paddingLeft: 0,
+            paddingBottom: 20, paddingRight: 20,
+            width: 0, height: 0)
+        return v
+    }()
+    
+    lazy var rangeBuyBudgetCon: UIView = {
+        let v  = UIView()
+        
+        let lblbuy = UILabel()
+        lblbuy.textColor = .white
+        lblbuy.text = "BUY BUDGET"
+        lblbuy.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        lblbuy.textAlignment = .left
+        let width = v.frame.size.width
+        print(width)
+        let buySlider: RangeSlider = RangeSlider(frame: CGRect(x: 0, y: 10, width: 350 , height: 20))
+        buySlider.addTarget(self, action: #selector(onChangeValueBuy(sender:)), for: .valueChanged)
+        buySlider.minimumValue = 0
+        buySlider.lowerValue = 0
+        buySlider.upperValue = 5000
+        buySlider.maximumValue = 10000
+        buySlider.translatesAutoresizingMaskIntoConstraints = false
+        
+        v.addSubview(lblbuy)
+        lblbuy.anchor(
+            top: v.topAnchor, left: v.leftAnchor,
+            bottom: nil, right: v.rightAnchor,
+                paddingTop: 10, paddingLeft: 10,
+                paddingBottom: 0, paddingRight: 10,
+                width: 0, height: 0)
+        
+        v.addSubview(buySlider)
+       
+        buySlider.anchor(
+            top: lblbuy.bottomAnchor, left: v.leftAnchor,
+            bottom: nil, right: v.rightAnchor,
+                paddingTop: 10, paddingLeft: 10,
+                paddingBottom: 10, paddingRight: 10,
+                width: 350, height: 20)
+        
+        
+        buySlider.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
+        buySlider.updateLayerFramesAndPositions()
+        
+        
+        v.addSubview(lblBuyLV)
+        v.addSubview(lblBuyHV)
+        lblBuyLV.anchor(
+            top: buySlider.bottomAnchor, left: v.leftAnchor,
+            bottom: nil, right: nil,
+            paddingTop: 0, paddingLeft: 20,
+            paddingBottom: 20, paddingRight: 0,
+            width: 0, height: 0)
+        lblBuyHV.anchor(
+            top: buySlider.bottomAnchor, left: nil,
             bottom: nil, right: v.rightAnchor,
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 20, paddingRight: 20,
@@ -193,6 +264,14 @@ class SearchController: UIViewController {
         v.addSubview(rangeRentBudgetCon)
         rangeRentBudgetCon.anchor(
             top: searchOptionContainer.bottomAnchor, left: v.leftAnchor,
+            bottom: nil, right: v.rightAnchor,
+            paddingTop: 0, paddingLeft: 10,
+            paddingBottom: 0, paddingRight: 10,
+            width: 0, height: 100)
+        
+        v.addSubview(rangeBuyBudgetCon)
+        rangeBuyBudgetCon.anchor(
+            top: rangeRentBudgetCon.bottomAnchor, left: v.leftAnchor,
             bottom: nil, right: v.rightAnchor,
             paddingTop: 0, paddingLeft: 10,
             paddingBottom: 0, paddingRight: 10,
@@ -356,10 +435,16 @@ class SearchController: UIViewController {
             btn.setTitleColor(UIColor.init(hexString: "#1D82D6"), for: .normal)
         }
     }
-    @objc func onChangeValue(sender: RangeSlider)
+    @objc func onChangeValueRent(sender: RangeSlider)
     {
         lblRentLV.text = "$\(String(Int(round(sender.lowerValue))))"
         lblRentHV.text = "$\(String(Int(round(sender.upperValue))))"
+        //print(Int(round(sender.upperValue)))
+    }
+    @objc func onChangeValueBuy(sender: RangeSlider)
+    {
+        lblBuyLV.text = "$\(String(Int(round(sender.lowerValue))))"
+        lblBuyHV.text = "$\(String(Int(round(sender.upperValue))))"
         //print(Int(round(sender.upperValue)))
     }
 }

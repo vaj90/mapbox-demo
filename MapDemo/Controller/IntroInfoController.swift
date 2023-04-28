@@ -36,7 +36,7 @@ class IntroInfoController: UIViewController {
             paddingTop: 40, paddingLeft: 10,
             paddingBottom: 0, paddingRight: 10,
             width: 0, height: 0)
-        v.backgroundColor = UIColor.init(hexString: "#1D82D6")
+        v.backgroundColor = UIColor.init(hexString: "#15A9FC")
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         return v
