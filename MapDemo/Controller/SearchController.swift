@@ -6,13 +6,30 @@
 //
 
 import UIKit
-
+import SwiftRangeSlider
 class SearchController: UIViewController {
     
     var isRent: Bool = false
     var isBuy: Bool = false
     var isBothRentAndBuy: Bool = false
     var arrOfBtns: [UIButton] = []
+    var lblRentLV : UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.text = "$0"
+        label.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        return label
+    }()
+    var lblRentHV : UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.text = "$5000"
+        label.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        return label
+    }()
+    
     
     var headerLabel : UILabel = {
         let label = UILabel()
@@ -27,8 +44,61 @@ class SearchController: UIViewController {
     }()
     lazy var rangeRentBudgetCon: UIView = {
         let v  = UIView()
-        //let rangeSliderRent =  NMRan
         
+        let lblrent = UILabel()
+        lblrent.textColor = .white
+        lblrent.text = "RENT BUDGET"
+        lblrent.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        lblrent.textAlignment = .left
+        let width = v.frame.size.width
+        print(width)
+        let rentSlider: RangeSlider = RangeSlider(frame: CGRect(x: 0, y: 10, width: 350 , height: 20))
+        rentSlider.addTarget(self, action: #selector(onChangeValue(sender:)), for: .valueChanged)
+        rentSlider.minimumValue = 0
+        rentSlider.lowerValue = 0
+        rentSlider.upperValue = 5000
+        rentSlider.maximumValue = 10000
+        rentSlider.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        
+        
+        v.addSubview(lblrent)
+        lblrent.anchor(
+            top: v.topAnchor, left: v.leftAnchor,
+            bottom: nil, right: v.rightAnchor,
+                paddingTop: 10, paddingLeft: 10,
+                paddingBottom: 0, paddingRight: 10,
+                width: 0, height: 0)
+        
+        v.addSubview(rentSlider)
+       
+        rentSlider.anchor(
+            top: lblrent.bottomAnchor, left: v.leftAnchor,
+            bottom: nil, right: v.rightAnchor,
+                paddingTop: 10, paddingLeft: 10,
+                paddingBottom: 10, paddingRight: 10,
+                width: 350, height: 20)
+        
+        
+        rentSlider.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
+        rentSlider.updateLayerFramesAndPositions()
+        
+        
+        v.addSubview(lblRentLV)
+        v.addSubview(lblRentHV)
+        lblRentLV.anchor(
+            top: rentSlider.bottomAnchor, left: v.leftAnchor,
+            bottom: nil, right: nil,
+            paddingTop: 0, paddingLeft: 20,
+            paddingBottom: 20, paddingRight: 0,
+            width: 0, height: 0)
+        lblRentHV.anchor(
+            top: rentSlider.bottomAnchor, left: nil,
+            bottom: nil, right: v.rightAnchor,
+            paddingTop: 0, paddingLeft: 0,
+            paddingBottom: 20, paddingRight: 20,
+            width: 0, height: 0)
         return v
     }()
     
@@ -55,7 +125,7 @@ class SearchController: UIViewController {
         btnToBuy.accessibilityValue = "ToBuy"
         
         let btnToRentAndBuy = UIButton()
-        btnToRentAndBuy.setTitle("To Both", for: .normal)
+        btnToRentAndBuy.setTitle("Show Both", for: .normal)
         btnToRentAndBuy.setTitleColor(UIColor.init(hexString: "#1D82D6"), for: .normal)
         btnToRentAndBuy.backgroundColor = .white
         btnToRentAndBuy.layer.cornerRadius = 5
@@ -119,8 +189,16 @@ class SearchController: UIViewController {
             bottom: nil, right: v.rightAnchor,
             paddingTop: 0, paddingLeft: 10,
             paddingBottom: 0, paddingRight: 10,
-            width: 0, height: 200)
-        v.backgroundColor = UIColor.init(hexString: "#1D82D6")
+            width: 0, height: 180)
+        v.addSubview(rangeRentBudgetCon)
+        rangeRentBudgetCon.anchor(
+            top: searchOptionContainer.bottomAnchor, left: v.leftAnchor,
+            bottom: nil, right: v.rightAnchor,
+            paddingTop: 0, paddingLeft: 10,
+            paddingBottom: 0, paddingRight: 10,
+            width: 0, height: 100)
+        
+        v.backgroundColor = UIColor.init(hexString: "#15A9FC")
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         return v
@@ -246,15 +324,15 @@ class SearchController: UIViewController {
             paddingTop: -15, paddingLeft: 0,
             paddingBottom: -15, paddingRight: 0,
             width: 0, height: 0)
-
+        
     }
     
     @objc private func goBack(){
        self.navigationController?.popViewController(animated: true )
     }
     @objc private func goNext(){
-        let nextController = AgeInfoController()
-        self.navigationController?.pushViewController(nextController, animated: true )
+        //let nextController = AgeInfoController()
+        //self.navigationController?.pushViewController(nextController, animated: true )
         print("next")
     }
     @objc private func goSkip(){
@@ -277,6 +355,12 @@ class SearchController: UIViewController {
             btn.backgroundColor = .white
             btn.setTitleColor(UIColor.init(hexString: "#1D82D6"), for: .normal)
         }
+    }
+    @objc func onChangeValue(sender: RangeSlider)
+    {
+        lblRentLV.text = "$\(String(Int(round(sender.lowerValue))))"
+        lblRentHV.text = "$\(String(Int(round(sender.upperValue))))"
+        //print(Int(round(sender.upperValue)))
     }
 }
 
