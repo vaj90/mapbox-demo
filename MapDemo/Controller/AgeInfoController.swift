@@ -10,7 +10,7 @@ class AgeInfoController: UIViewController {
     
     var headerLabel : UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.init(hexString: "#1D82D6")
+        label.textColor = UIColor.init(hexString: "#15A9FC")
         label.textAlignment = .center
         let attrNormalText = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Light", size: 24)];
         let attrBoldText = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Bold", size: 24)];
@@ -79,7 +79,7 @@ class AgeInfoController: UIViewController {
             paddingBottom: 5, paddingRight: 15,
             width: 32, height: 32)
 
-        v.backgroundColor =  UIColor.init(hexString: "#1D82D6")
+        v.backgroundColor =  UIColor.init(hexString: "#15A9FC")
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         v.layer.zPosition = 1

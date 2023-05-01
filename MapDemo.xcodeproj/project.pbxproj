@@ -33,6 +33,7 @@
 		9FC62EB629F4FC4C0063ADD8 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FC62EB529F4FC4C0063ADD8 /* Ubuntu-Light.ttf */; };
 		9FC62EB929F4FC850063ADD8 /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FC62EB729F4FC850063ADD8 /* Ubuntu-Italic.ttf */; };
 		9FC62EBA29F4FC850063ADD8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FC62EB829F4FC850063ADD8 /* Ubuntu-Bold.ttf */; };
+		9FC62EC029FF6E640063ADD8 /* CalendarPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EBF29FF6E640063ADD8 /* CalendarPageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +80,7 @@
 		9FC62EB529F4FC4C0063ADD8 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		9FC62EB729F4FC850063ADD8 /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
 		9FC62EB829F4FC850063ADD8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		9FC62EBF29FF6E640063ADD8 /* CalendarPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				9F2CD59A29F438DB00239067 /* SearchController.swift */,
 				9F2CD59D29F44B4700239067 /* IntroInfoController.swift */,
 				9F2CD5A229F44CA100239067 /* AgeInfoController.swift */,
+				9FC62EBF29FF6E640063ADD8 /* CalendarPageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				9F2CD59E29F44B4700239067 /* IntroInfoController.swift in Sources */,
 				9F2CD5A729F45C3A00239067 /* Extensions.swift in Sources */,
 				9F2CD56C29EEFE4D00239067 /* AppDelegate.swift in Sources */,
+				9FC62EC029FF6E640063ADD8 /* CalendarPageController.swift in Sources */,
 				9F2CD59729F4377A00239067 /* SearchModel.swift in Sources */,
 				9F2CD5A329F44CA100239067 /* AgeInfoController.swift in Sources */,
 				9F2CD5A529F44FA000239067 /* Color.swift in Sources */,
