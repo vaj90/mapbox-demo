@@ -6,7 +6,8 @@
 //
 import UIKit
 import FSCalendar
-class CalendarPageController: UIViewController, FSCalendarDelegate {
+import SwiftCarousel
+class CalendarPageController: UIViewController, FSCalendarDelegate, SwiftCarouselDelegate {
     
     var headerLabel : UILabel = {
         let label = UILabel()
@@ -16,9 +17,9 @@ class CalendarPageController: UIViewController, FSCalendarDelegate {
         label.font = UIFont(name:"Ubuntu-Light", size: 26)
         return label
     }()
-
+    var arrOfBtns: [UIButton] = []
     var calendar: FSCalendar!
-    
+    var carouselView: SwiftCarousel!
     
     lazy var topNav: UIView = {
         let v  = UIView()
@@ -65,6 +66,12 @@ class CalendarPageController: UIViewController, FSCalendarDelegate {
         lblViewDate.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
         lblViewDate.textAlignment = .left
         
+        let lblViewTime = UILabel()
+        lblViewTime.textColor = UIColor.init(hexString: "#68B2F0")
+        lblViewTime.text = "AVAILABLE TIME"
+        lblViewTime.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        lblViewTime.textAlignment = .left
+        
         view.addSubview(headerLabel)
         headerLabel.anchor(
             top: topNav.bottomAnchor, left: view.leftAnchor,
@@ -90,10 +97,90 @@ class CalendarPageController: UIViewController, FSCalendarDelegate {
             paddingBottom: 10, paddingRight: 15,
             width: view.frame.width, height: 350)
         calendar.delegate = self
-    }
     
+        view.addSubview(lblViewTime)
+        lblViewTime.anchor(
+            top: calendar.bottomAnchor, left: view.leftAnchor,
+            bottom: nil, right: view.rightAnchor,
+            paddingTop: 10, paddingLeft: 15,
+            paddingBottom: 0, paddingRight: 15,
+            width: 0, height: 0)
+        
+        let carouselFrame = CGRect(x: view.center.x - 200.0, y: view.center.y - 100.0, width: view.frame.width, height: 100)
+        carouselView = SwiftCarousel(frame: carouselFrame)
+        var arrTime: [String] = [];
+        for i in 0...23 {
+            for j in 0...1 {
+                var strTime = ( i < 10 ) ? "0\(i):" : "\(i):"
+                strTime += (j == 0) ? "00" : "\(j*30)"
+                strTime += (i <= 12) ? " am" : " pm"
+                arrTime.append(strTime)
+          }
+        }
+        print(arrTime)
+        let itemsViews = arrTime.map {
+            createTimeBtn(string: $0)
+        }
+        //carouselView.backgroundColor = .red
+        carouselView.items = itemsViews
+        carouselView.resizeType = .visibleItemsPerPage(3)
+        carouselView.delegate = self
+        carouselView.defaultSelectedIndex = 9
+        view.addSubview(carouselView)
+    
+        carouselView.anchor(
+            top: lblViewTime.bottomAnchor, left: view.leftAnchor,
+            bottom: nil, right: view.rightAnchor,
+            paddingTop: 10, paddingLeft: 15,
+            paddingBottom: 0, paddingRight: 15,
+            width: 0, height: 100)
+    }
+    func createTimeBtn(string: String) -> UIView {
+        let v  = UIView()
+        let btnTime = UIButton()
+        btnTime.setTitle(string, for: .normal)
+        btnTime.setTitleColor(UIColor.init(hexString: "#1F94F5"), for: .normal)
+        btnTime.backgroundColor = .white
+        btnTime.layer.cornerRadius = 10
+        btnTime.titleLabel?.font = UIFont(name:"Ubuntu-Bold", size: 16)
+        btnTime.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner ]
+        btnTime.layer.borderColor = UIColor.init(hexString: "#1F94F5").cgColor
+        btnTime.layer.borderWidth = 1.5
+        btnTime.layer.masksToBounds = true
+        v.addSubview(btnTime)
+        btnTime.anchor(
+            top: v.topAnchor, left: nil,
+            bottom: v.bottomAnchor, right: nil,
+            paddingTop: 10, paddingLeft: 10,
+            paddingBottom: 10, paddingRight: 10,
+            width: 80, height: 0)
+        btnTime.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
+        btnTime.addTarget(self, action: #selector(selectedBtn(sender:)), for: .touchUpInside)
+        btnTime.accessibilityValue = string
+        arrOfBtns.append(btnTime)
+        
+        return v
+    }
+    @objc func selectedBtn(sender : UIButton) {
+        let valStr: String!
+        valStr = sender.accessibilityValue?.description
+        print(valStr!)
+        deselectButtons()
+        sender.backgroundColor = UIColor.init(hexString: "#1F94F5")
+        sender.setTitleColor(.white, for: .normal)
+    }
+    func deselectButtons(){
+        for btn in arrOfBtns
+        {
+            btn.backgroundColor = .white
+            btn.setTitleColor(UIColor.init(hexString: "#1D82D6"), for: .normal)
+        }
+    }
     @objc private func goBack(){
         print("tapped")
+    }
+    @objc private func setTime(){
+        print("time")
     }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
            let formatter = DateFormatter()
@@ -107,5 +194,4 @@ class CalendarPageController: UIViewController, FSCalendarDelegate {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
         setUpView()
     }
-
 }
