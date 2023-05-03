@@ -106,7 +106,8 @@ class CalendarPageController: UIViewController, FSCalendarDelegate, SwiftCarouse
             paddingBottom: 0, paddingRight: 15,
             width: 0, height: 0)
         
-        let carouselFrame = CGRect(x: view.center.x - 200.0, y: view.center.y - 100.0, width: view.frame.width, height: 100)
+        let carouselFrame = CGRect(x: view.center.x - 200.0, y: view.center.y - 100.0, width: view.frame.width, height: 80)
+        carouselFrame.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
         carouselView = SwiftCarousel(frame: carouselFrame)
         var arrTime: [String] = [];
         for i in 0...23 {
@@ -123,9 +124,11 @@ class CalendarPageController: UIViewController, FSCalendarDelegate, SwiftCarouse
         }
         //carouselView.backgroundColor = .red
         carouselView.items = itemsViews
-        carouselView.resizeType = .visibleItemsPerPage(3)
+        carouselView.resizeType = .withoutResizing(10.0)
+        carouselView.resizeType = .visibleItemsPerPage(5)
         carouselView.delegate = self
         carouselView.defaultSelectedIndex = 9
+    
         view.addSubview(carouselView)
     
         carouselView.anchor(
@@ -137,6 +140,7 @@ class CalendarPageController: UIViewController, FSCalendarDelegate, SwiftCarouse
     }
     func createTimeBtn(string: String) -> UIView {
         let v  = UIView()
+        let strArr = string.components(separatedBy: .whitespaces)
         let btnTime = UIButton()
         btnTime.setTitle(string, for: .normal)
         btnTime.setTitleColor(UIColor.init(hexString: "#1F94F5"), for: .normal)
@@ -147,13 +151,23 @@ class CalendarPageController: UIViewController, FSCalendarDelegate, SwiftCarouse
         btnTime.layer.borderColor = UIColor.init(hexString: "#1F94F5").cgColor
         btnTime.layer.borderWidth = 1.5
         btnTime.layer.masksToBounds = true
+        btnTime.titleLabel?.numberOfLines = 2
+        let title = NSMutableAttributedString()
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let timeValue = NSAttributedString(string: "\(strArr[0])\n", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        let typeType = NSAttributedString(string: strArr[1], attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        title.append(timeValue)
+        title.append(typeType)
+        btnTime.setAttributedTitle(title, for: .normal)
+        
         v.addSubview(btnTime)
         btnTime.anchor(
             top: v.topAnchor, left: nil,
             bottom: v.bottomAnchor, right: nil,
-            paddingTop: 10, paddingLeft: 10,
-            paddingBottom: 10, paddingRight: 10,
-            width: 80, height: 0)
+            paddingTop: 10, paddingLeft: 5,
+            paddingBottom: 10, paddingRight: 5,
+            width: 50, height: 0)
         btnTime.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
         btnTime.addTarget(self, action: #selector(selectedBtn(sender:)), for: .touchUpInside)
         btnTime.accessibilityValue = string
