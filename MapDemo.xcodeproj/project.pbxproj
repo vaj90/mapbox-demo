@@ -34,6 +34,9 @@
 		9FC62EB929F4FC850063ADD8 /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FC62EB729F4FC850063ADD8 /* Ubuntu-Italic.ttf */; };
 		9FC62EBA29F4FC850063ADD8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FC62EB829F4FC850063ADD8 /* Ubuntu-Bold.ttf */; };
 		9FC62EC029FF6E640063ADD8 /* CalendarPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EBF29FF6E640063ADD8 /* CalendarPageController.swift */; };
+		9FC62EC22A0831AF0063ADD8 /* MapSampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC12A0831AF0063ADD8 /* MapSampleController.swift */; };
+		9FC62EC42A0872940063ADD8 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC32A0872940063ADD8 /* MapManager.swift */; };
+		9FC62EC72A089BD70063ADD8 /* NeighbourhoodGeoJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,6 +84,9 @@
 		9FC62EB729F4FC850063ADD8 /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
 		9FC62EB829F4FC850063ADD8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		9FC62EBF29FF6E640063ADD8 /* CalendarPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageController.swift; sourceTree = "<group>"; };
+		9FC62EC12A0831AF0063ADD8 /* MapSampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSampleController.swift; sourceTree = "<group>"; };
+		9FC62EC32A0872940063ADD8 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
+		9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighbourhoodGeoJson.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +166,7 @@
 			children = (
 				9F2CD59129F1112300239067 /* DataLocation.swift */,
 				9F2CD59629F4377A00239067 /* SearchModel.swift */,
+				9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				9F2CD59829F4387800239067 /* SearchViewModel.swift */,
+				9FC62EC32A0872940063ADD8 /* MapManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 				9F2CD59D29F44B4700239067 /* IntroInfoController.swift */,
 				9F2CD5A229F44CA100239067 /* AgeInfoController.swift */,
 				9FC62EBF29FF6E640063ADD8 /* CalendarPageController.swift */,
+				9FC62EC12A0831AF0063ADD8 /* MapSampleController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -338,9 +347,12 @@
 				9F2CD5A729F45C3A00239067 /* Extensions.swift in Sources */,
 				9F2CD56C29EEFE4D00239067 /* AppDelegate.swift in Sources */,
 				9FC62EC029FF6E640063ADD8 /* CalendarPageController.swift in Sources */,
+				9FC62EC22A0831AF0063ADD8 /* MapSampleController.swift in Sources */,
 				9F2CD59729F4377A00239067 /* SearchModel.swift in Sources */,
+				9FC62EC42A0872940063ADD8 /* MapManager.swift in Sources */,
 				9F2CD5A329F44CA100239067 /* AgeInfoController.swift in Sources */,
 				9F2CD5A529F44FA000239067 /* Color.swift in Sources */,
+				9FC62EC72A089BD70063ADD8 /* NeighbourhoodGeoJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

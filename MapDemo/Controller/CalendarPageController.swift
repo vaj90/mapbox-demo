@@ -198,7 +198,7 @@ class CalendarPageController: UIViewController, FSCalendarDelegate, SwiftCarouse
     }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
            let formatter = DateFormatter()
-           formatter.dateFormat = "dd/MM-yyyy"
+           formatter.dateFormat = "MM/dd/yyyy"
            let result = formatter.string(from: date)
         print("Date: \(result)")
        }
