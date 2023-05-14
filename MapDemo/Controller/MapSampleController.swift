@@ -87,16 +87,17 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
         let options = MapInitOptions(resourceOptions: resourceOptions, cameraOptions: CameraOptions(center: centerCoordinate, zoom: 7), styleURI: .streets)
         mapView = MapView(frame: view.bounds, mapInitOptions: options)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        polygonAnnotationManager = mapView.annotations.makePolygonAnnotationManager()
+        polylineAnnotationManager = mapView.annotations.makePolylineAnnotationManager()
+        polygonAnnotationManager.delegate = self
+        polylineAnnotationManager.delegate = self
         self.view.addSubview(mapView)
         mapView.mapboxMap.onNext(event: .mapLoaded){ [weak self] _ in
             guard let self = self else { return }
             mapView.camera.ease(to: CameraOptions(center: centerCoordinate, zoom: 10, pitch: 5),duration: 1.3)
             addMarker(at: centerCoordinate)
-            polygonAnnotationManager = mapView.annotations.makePolygonAnnotationManager()
-            polylineAnnotationManager = mapView.annotations.makePolylineAnnotationManager()
             getGeoJSON()
         }
-
     }
     func addMarker(at coordinate: CLLocationCoordinate2D) -> Void {
         var pointAnnotation = PointAnnotation(coordinate: coordinate)
@@ -110,4 +111,18 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
             centerCoordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         }
     }
+}
+extension MapSampleController: AnnotationInteractionDelegate {
+    public func annotationManager(_ manager: AnnotationManager, didDetectTappedAnnotations annotations: [Annotation]) {
+        guard let tappedAnnotation = annotations.first else { return }
+        if let polygonAnnotationManager = self.polygonAnnotationManager,
+           let index = polygonAnnotationManager.annotations.firstIndex(where: { $0.id == tappedAnnotation.id }) {
+
+            var annotation = polygonAnnotationManager.annotations[index]
+            annotation.fillColor =  StyleColor.init(UIColor.init(hexString: "#999999"))
+            annotation.fillOpacity = 1
+         
+        }
+    }
+   
 }
