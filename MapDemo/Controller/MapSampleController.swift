@@ -42,7 +42,7 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
                         let coords = geo.geometry.coordinates.first
                         let identifier = "\(geo.properties.propertyID)"
                         var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
-                        var lineAnnotation = createPolyline(coords: coords!)
+                        var lineAnnotation = createPolyline(id: identifier, coords: coords!)
                         polygonAnnotations.append(polygonAnnotation)
                         polylineAnnotations.append(lineAnnotation)
                     }
@@ -64,21 +64,21 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
         let ring = Ring(coordinates: ringCoords)
         let polygon = Polygon(outerRing: ring)
         var polygonAnnotation = PolygonAnnotation(id: id, polygon: polygon)
-        polygonAnnotation.fillOpacity = 0.5
+        polygonAnnotation.fillOpacity = 0.4
         polygonAnnotation.fillColor = StyleColor.init(UIColor.init(hexString: "#1D82D6"))
         return polygonAnnotation
     }
-    func createPolyline(coords:[[Double]] ) -> PolylineAnnotation{
+    func createPolyline(id: String, coords:[[Double]] ) -> PolylineAnnotation{
         var ringCoords : [CLLocationCoordinate2D] = []
         for coord in coords {
             let lng = coord[0]
             let lat = coord[1]
             ringCoords.append(CLLocationCoordinate2DMake(lat,lng))
         }
-        var lineAnnotation =  PolylineAnnotation(lineCoordinates: ringCoords)
+        var lineAnnotation =  PolylineAnnotation(id: id, lineCoordinates: ringCoords)
         lineAnnotation.lineColor = StyleColor.init(UIColor.init(hexString: "#0080FF"))
-        lineAnnotation.lineOpacity = 0.6
-        lineAnnotation.lineWidth = 2
+        lineAnnotation.lineOpacity = 0.4
+        lineAnnotation.lineWidth = 1
         return lineAnnotation
     }
     func setUpMap() {
@@ -114,14 +114,28 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
 }
 extension MapSampleController: AnnotationInteractionDelegate {
     public func annotationManager(_ manager: AnnotationManager, didDetectTappedAnnotations annotations: [Annotation]) {
-        guard let tappedAnnotation = annotations.first else { return }
-        if let polygonAnnotationManager = self.polygonAnnotationManager,
-           let index = polygonAnnotationManager.annotations.firstIndex(where: { $0.id == tappedAnnotation.id }) {
-
-            var annotation = polygonAnnotationManager.annotations[index]
-            annotation.fillColor =  StyleColor.init(UIColor.init(hexString: "#999999"))
-            annotation.fillOpacity = 1
-         
+        guard let tappedAnnotation = annotations.first else {return}
+        DispatchQueue.main.async { [self] in
+            resetPolyline()
+            if let pManager = self.polylineAnnotationManager,
+               let idx = pManager.annotations.firstIndex(where:  { $0.id == tappedAnnotation.id }) {
+                var annotation = pManager.annotations[idx]
+                annotation.lineOpacity = 1.0
+                annotation.lineWidth = 2
+                pManager.annotations[idx] = annotation
+            }
+        }
+    }
+    func resetPolyline(){
+        let annotations = polylineAnnotationManager.annotations
+        for annotation in annotations {
+            if let pManager = self.polylineAnnotationManager,
+                let idx = pManager.annotations.firstIndex(where:  { $0.id == annotation.id }) {
+                var polyAnnotation = annotation
+                polyAnnotation.lineOpacity = 0.4
+                polyAnnotation.lineWidth = 1
+                pManager.annotations[idx] = polyAnnotation
+            }
         }
     }
    
