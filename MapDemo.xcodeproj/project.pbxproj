@@ -38,6 +38,7 @@
 		9FC62EC42A0872940063ADD8 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC32A0872940063ADD8 /* MapManager.swift */; };
 		9FC62EC72A089BD70063ADD8 /* NeighbourhoodGeoJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */; };
 		9FC62EC92A0E94EA0063ADD8 /* MapSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC82A0E94EA0063ADD8 /* MapSearchController.swift */; };
+		9FE6DBA82A1C301A002BA940 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,6 +90,7 @@
 		9FC62EC32A0872940063ADD8 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighbourhoodGeoJson.swift; sourceTree = "<group>"; };
 		9FC62EC82A0E94EA0063ADD8 /* MapSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchController.swift; sourceTree = "<group>"; };
+		9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 				9FC62EBF29FF6E640063ADD8 /* CalendarPageController.swift */,
 				9FC62EC12A0831AF0063ADD8 /* MapSampleController.swift */,
 				9FC62EC82A0E94EA0063ADD8 /* MapSearchController.swift */,
+				9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				9FC62EC22A0831AF0063ADD8 /* MapSampleController.swift in Sources */,
 				9F2CD59729F4377A00239067 /* SearchModel.swift in Sources */,
 				9FC62EC42A0872940063ADD8 /* MapManager.swift in Sources */,
+				9FE6DBA82A1C301A002BA940 /* LocationSearchController.swift in Sources */,
 				9F2CD5A329F44CA100239067 /* AgeInfoController.swift in Sources */,
 				9F2CD5A529F44FA000239067 /* Color.swift in Sources */,
 				9FC62EC72A089BD70063ADD8 /* NeighbourhoodGeoJson.swift in Sources */,
