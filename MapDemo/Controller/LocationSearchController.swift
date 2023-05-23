@@ -208,6 +208,10 @@ extension LocationSearchController : UISearchBarDelegate , UITableViewDelegate, 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
+            if self.selectedCells.contains(filteredData[indexPath.row].neighbourhoodId) {
+                let index = self.selectedCells.firstIndex(of: filteredData[indexPath.row].neighbourhoodId)
+                selectedCells.remove(at: index!)
+            }
             filteredData.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with:  .fade)
             tableView.endUpdates()
@@ -255,7 +259,8 @@ extension LocationSearchController : UISearchBarDelegate , UITableViewDelegate, 
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredData = searchText.isEmpty ? [] : getList().filter { $0.neighbourhoodName.contains(searchText)}
-        print(filteredData)
+        //print(filteredData)
         tableView.reloadData()
+        selectedCells = []
     }
 }
