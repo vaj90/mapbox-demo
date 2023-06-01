@@ -20,6 +20,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
     var polygonAnnotationManager: PolygonAnnotationManager!
     var polylineAnnotationManager: PolylineAnnotationManager!
     var resourceOptions = ResourceOptions(accessToken: "pk.eyJ1IjoiYmxvY2VzdGF0ZTEiLCJhIjoiY2xjeXd6aW40MDAwbzNxbzQ4a2xzMXQ2biJ9.wOAZ-fxbPhXhLouH7uFpcA")
+    var neighbourhoodIds: [Int] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         if (CLLocationManager.locationServicesEnabled())
@@ -40,22 +41,9 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
         label.font = UIFont(name:"Ubuntu-Bold", size: 18)
         return label
     }()
-    var headerLabel : UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
-        let attrNormalText = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Light", size: 24)];
-        let attrBoldText = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Bold", size: 24)];
-        let attributeText = NSMutableAttributedString(string: "What is your", attributes: attrNormalText as [NSAttributedString.Key : Any])
-        attributeText.append(NSAttributedString(string: " full name?", attributes: attrBoldText as [NSAttributedString.Key : Any]))
-        label.attributedText = attributeText
-        return label
-    }()
 
-    
     var headerTitle : UIView = {
         let v = UIView()
-        
         let imgStar = UIImage(named:"star")?.withRenderingMode(.alwaysTemplate)
         var imgSt = UIImageView(image: imgStar!)
         imgSt.tintColor = UIColor.init(hexString: "#1D82D6")
@@ -105,7 +93,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
     lazy var mapContainer : UIView = {
         let v = UIView()
         
-        let imgBack = UIImage(named:"left-arrow")?.withRenderingMode(.alwaysTemplate)
+        /*let imgBack = UIImage(named:"left-arrow")?.withRenderingMode(.alwaysTemplate)
         var imgB = UIImageView(image: imgBack!)
         imgB.tintColor = UIColor.init(hexString: "#1D82D6")
         imgB.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goBack)))
@@ -117,14 +105,18 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
             bottom: nil, right: nil,
             paddingTop: 0, paddingLeft: 10,
             paddingBottom: 20, paddingRight: 0,
-            width: 30, height: 30)
+            width: 30, height: 30)*/
   
         let imgMarker = UIImage(named:"marker")?.withRenderingMode(.alwaysTemplate)
         var imgMark = UIImageView(image: imgMarker!)
         imgMark.tintColor = UIColor.init(hexString: "#1D82D6")
         imgMark.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goBack)))
         imgMark.isUserInteractionEnabled = true
-
+        
+        let tapSkip = UITapGestureRecognizer(target: self, action: #selector(search))
+        locationTitle.addGestureRecognizer(tapSkip)
+        locationTitle.isUserInteractionEnabled = true
+        
         v.addSubview(locationTitle)
         locationTitle.anchor(
             top: v.topAnchor, left: nil,
@@ -141,9 +133,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 5,
             width: 28, height: 28)
-        
 
-        
         return v
     }()
     
@@ -187,7 +177,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
             guard let self = self else { return }
             //mapView.camera.ease(to: CameraOptions(center: centerCoordinate, zoom: 10, pitch: 5),duration: 1.3)
             addMarker(at: centerCoordinate)
-            getGeoJSON(arrIds: [84,85,86])
+            getGeoJSON(arrIds: neighbourhoodIds)
         }
         v.backgroundColor = UIColor.init(hexString: "#25edd5")
         v.layer.cornerRadius = 20
@@ -261,10 +251,18 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
        // self.navigationController?.popViewController(animated: true )
         print("tapped")
     }
+    @objc private func search(){
+        let vController = LocationSearchController()
+        self.navigationController?.pushViewController(vController, animated: true )
+    }
     func getGeoJSON(arrIds: [Int]) {
-        var ids = arrIds.map{String($0)}
-        let strIds = ids.joined(separator: ",")
-        var url = "https://blocestate-mobile-api.azurewebsites.net/api/neighbourhoods/filter?neighbourhoodids=\(strIds)"
+        var url = "https://blocestatefiles.blob.core.windows.net/geojson/neighbourhoods.geojson"
+        if !arrIds.isEmpty {
+            var ids = arrIds.map{String($0)}
+            let strIds = ids.joined(separator: ",")
+            url = "https://blocestate-mobile-api.azurewebsites.net/api/neighbourhoods/filter?neighbourhoodids=\(strIds)"
+        }
+       
         MapManager.instance.get(url: "\(url)") { [self]
             (response, error) in
             if let result = response {
@@ -274,21 +272,23 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
                     var polygonAnnotations: [PolygonAnnotation] = []
                     var polylineAnnotations: [PolylineAnnotation] = []
                     for geo in geoJson.features {
-                        let coords = geo.geometry.coordinates.first
-                        let identifier = "\(geo.properties.propertyID)"
-                        var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
-                        var lineAnnotation = createPolyline(id: identifier, coords: coords!)
-                        polygonAnnotation.userInfo = [
-                            "title": geo.properties.title,
-                            "description": geo.properties.description
-                        ]
-                        polygonAnnotations.append(polygonAnnotation)
-                        polylineAnnotations.append(lineAnnotation)
-                        if firstGeo == nil {
-                            if let center = polygonAnnotation.polygon.center {
-                                let lat = center.latitude
-                                let lng = center.longitude
-                                firstGeo = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+                        if geo.properties.title != "" {
+                            let coords = geo.geometry.coordinates.first
+                            let identifier = "\(geo.properties.propertyID)"
+                            var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
+                            var lineAnnotation = createPolyline(id: identifier, coords: coords!)
+                            polygonAnnotation.userInfo = [
+                                "title": geo.properties.title,
+                                "description": geo.properties.description
+                            ]
+                            polygonAnnotations.append(polygonAnnotation)
+                            polylineAnnotations.append(lineAnnotation)
+                            if firstGeo == nil {
+                                if let center = polygonAnnotation.polygon.center {
+                                    let lat = center.latitude
+                                    let lng = center.longitude
+                                    firstGeo = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+                                }
                             }
                         }
                     }

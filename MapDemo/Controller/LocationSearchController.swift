@@ -12,6 +12,14 @@ struct Neighbourhood {
     //var neighbourhoodImage : UIImage
     //var neighbourhoodDesc : String
 }
+struct Neighbourhoods: Codable {
+    var returnCode: Int
+    var data: [NeighbourhoodItem]
+}
+struct NeighbourhoodItem: Codable {
+    var id: Int
+    var name: String
+}
 class NeighbourhoodTableViewCell : UITableViewCell {
     static let identifier = "NeighbourhoodCell"
     let cancelImage : UIImageView = {
@@ -46,12 +54,15 @@ class NeighbourhoodTableViewCell : UITableViewCell {
 class LocationSearchController: UIViewController {
     lazy var searchBar:UISearchBar = UISearchBar()
     lazy var tableView: UITableView = UITableView()
-    var filteredData: [Neighbourhood]!
+    var neighbourhoods: [NeighbourhoodItem]!
+    var filteredData: [NeighbourhoodItem]!
     let cellSpacingHeight: CGFloat = 5
     var selectedCells:[Int] = []
+    var selectedNeighbourhoods: [NeighbourhoodItem]! = []
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.init(hexString: "#f3f9ff")
+        getList()
         filteredData = []
         setUpView()
         searchBar.delegate = self
@@ -69,6 +80,14 @@ class LocationSearchController: UIViewController {
         lblSelectedNeigh.text = "Selected Neighbourhoods"
         lblSelectedNeigh.font = UIFont(name:"Ubuntu-Light", size: 16.0)
         lblSelectedNeigh.textAlignment = .left
+        let btnSubmit = UIButton()
+        btnSubmit.setTitle("Submit", for: .normal)
+        btnSubmit.setTitleColor(UIColor.init(hexString: "#1d82d6"), for: .normal)
+        btnSubmit.backgroundColor = UIColor.init(hexString: "#00ffff")
+        btnSubmit.layer.cornerRadius = 5
+        btnSubmit.titleLabel?.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
+        btnSubmit.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner ]
+        btnSubmit.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
         v.addSubview(lblSelectedNeigh)
         lblSelectedNeigh.anchor(
@@ -78,14 +97,23 @@ class LocationSearchController: UIViewController {
             paddingBottom: 0, paddingRight: 0,
             width: 0, height: 20)
         
+        v.addSubview(btnSubmit)
+        btnSubmit.anchor(
+            top: nil, left: v.leftAnchor,
+            bottom: v.bottomAnchor, right: v.rightAnchor,
+            paddingTop: 20, paddingLeft: 0,
+            paddingBottom: 10, paddingRight: 0,
+            width: 0, height: 40)
+        
         v.addSubview(tableView)
         tableView.anchor(
             top: lblSelectedNeigh.bottomAnchor, left: v.leftAnchor,
-            bottom: v.bottomAnchor, right: v.rightAnchor,
+            bottom: btnSubmit.topAnchor, right: v.rightAnchor,
             paddingTop: 20, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
             width: 0, height: 0)
         tableView.backgroundColor = UIColor.init(hexString: "#f3f9ff")
+        
         v.backgroundColor = UIColor.init(hexString: "#f3f9ff")
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
@@ -145,7 +173,11 @@ class LocationSearchController: UIViewController {
         return v
     }()
     
-  
+    @objc private func goBack(){
+        let vController = MapSearchController()
+        vController.neighbourhoodIds = selectedCells
+        self.navigationController?.pushViewController(vController, animated: true )
+    }
     func setUpView(){
         let height = navigationController?.navigationBar.frame.maxY
         navigationController?.navigationBar.isHidden = true
@@ -164,16 +196,12 @@ class LocationSearchController: UIViewController {
             top: topNav.bottomAnchor, left: topNav.leftAnchor,
             bottom: view.bottomAnchor, right: topNav.rightAnchor,
             paddingTop: 0, paddingLeft: 0,
-            paddingBottom: 0, paddingRight: 0,
+            paddingBottom: 10, paddingRight: 0,
             width: 0, height: 0)
 
     }
     
-    @objc private func goBack(){
-        //let infoController = IntroInfoController()
-       // self.navigationController?.popViewController(animated: true )
-        print("tapped")
-    }
+
  
 }
 
@@ -187,29 +215,34 @@ extension LocationSearchController : UISearchBarDelegate , UITableViewDelegate, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NeighbourhoodTableViewCell.identifier) as! NeighbourhoodTableViewCell
-        cell.neighbourhoodName.text = filteredData[indexPath.row].neighbourhoodName
+        cell.neighbourhoodName.text = filteredData[indexPath.row].name
         cell.clipsToBounds = true
-        cell.accessoryType = self.selectedCells.contains(filteredData[indexPath.row].neighbourhoodId) ? .checkmark : .none
+        cell.accessoryType = self.selectedCells.contains(filteredData[indexPath.row].id) ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.selectedCells.contains(filteredData[indexPath.row].neighbourhoodId) {
-            let index = self.selectedCells.firstIndex(of: filteredData[indexPath.row].neighbourhoodId)
+        if self.selectedCells.contains(filteredData[indexPath.row].id) {
+            let index = self.selectedCells.firstIndex(of: filteredData[indexPath.row].id)
             selectedCells.remove(at: index!)
+            if let idx = selectedNeighbourhoods.index(where: { $0.id == filteredData[indexPath.row].id}){
+                selectedNeighbourhoods.remove(at: idx)
+            }
         }
         else{
-            selectedCells.append(filteredData[indexPath.row].neighbourhoodId)
+            selectedCells.append(filteredData[indexPath.row].id)
+            selectedNeighbourhoods.append(NeighbourhoodItem(id: filteredData[indexPath.row].id,
+                                                            name: filteredData[indexPath.row].name))
         }
-        print(selectedCells)
+        print(selectedNeighbourhoods)
         tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-            if self.selectedCells.contains(filteredData[indexPath.row].neighbourhoodId) {
-                let index = self.selectedCells.firstIndex(of: filteredData[indexPath.row].neighbourhoodId)
+            if self.selectedCells.contains(filteredData[indexPath.row].id) {
+                let index = self.selectedCells.firstIndex(of: filteredData[indexPath.row].id)
                 selectedCells.remove(at: index!)
             }
             filteredData.remove(at: indexPath.row)
@@ -218,49 +251,28 @@ extension LocationSearchController : UISearchBarDelegate , UITableViewDelegate, 
         }
     }
     
-    func getList() -> Array<Neighbourhood>{
-        let data = [
-            Neighbourhood(neighbourhoodId: 1, neighbourhoodName:  "Alexandra Park"),
-            Neighbourhood(neighbourhoodId: 2, neighbourhoodName:  "The Annex"),
-            Neighbourhood(neighbourhoodId: 3, neighbourhoodName:  "Baldwin Village"),
-            Neighbourhood(neighbourhoodId: 4, neighbourhoodName:  "Cabbagetown"),
-            Neighbourhood(neighbourhoodId: 5, neighbourhoodName:  "CityPlace"),
-            Neighbourhood(neighbourhoodId: 6, neighbourhoodName:  "Chinatown"),
-            Neighbourhood(neighbourhoodId: 7, neighbourhoodName:  "Church and Wellesley"),
-            Neighbourhood(neighbourhoodId: 8, neighbourhoodName:  "Corktown"),
-            Neighbourhood(neighbourhoodId: 9, neighbourhoodName:  "Discovery District"),
-            Neighbourhood(neighbourhoodId: 10, neighbourhoodName:  "Distillery District"),
-            Neighbourhood(neighbourhoodId: 11, neighbourhoodName:  "Entertainment District"),
-            Neighbourhood(neighbourhoodId: 12, neighbourhoodName:  "East Bayfront"),
-            Neighbourhood(neighbourhoodId: 13, neighbourhoodName:  "Fashion District"),
-            Neighbourhood(neighbourhoodId: 14, neighbourhoodName:  "Financial District"),
-            Neighbourhood(neighbourhoodId: 15, neighbourhoodName:  "Garden District"),
-            Neighbourhood(neighbourhoodId: 16, neighbourhoodName:  "Grange Park"),
-            Neighbourhood(neighbourhoodId: 17, neighbourhoodName:  "Harbord Village"),
-            Neighbourhood(neighbourhoodId: 18, neighbourhoodName:  "Harbourfront"),
-            Neighbourhood(neighbourhoodId: 19, neighbourhoodName:  "Kensington Market"),
-            Neighbourhood(neighbourhoodId: 20, neighbourhoodName:  "Little Japan"),
-            Neighbourhood(neighbourhoodId: 21, neighbourhoodName:  "Moss Park"),
-            Neighbourhood(neighbourhoodId: 22, neighbourhoodName:  "Old Town"),
-            Neighbourhood(neighbourhoodId: 23, neighbourhoodName:  "Quayside"),
-            Neighbourhood(neighbourhoodId: 24, neighbourhoodName:  "Queen Street West"),
-            Neighbourhood(neighbourhoodId: 25, neighbourhoodName:  "Regent Park"),
-            Neighbourhood(neighbourhoodId: 26, neighbourhoodName:  "South Core"),
-            Neighbourhood(neighbourhoodId: 27, neighbourhoodName:  "St. James Town"),
-            Neighbourhood(neighbourhoodId: 28, neighbourhoodName:  "St. Lawrence"),
-            Neighbourhood(neighbourhoodId: 29, neighbourhoodName:  "Toronto Islands"),
-            Neighbourhood(neighbourhoodId: 30, neighbourhoodName:  "Trefann Court"),
-            Neighbourhood(neighbourhoodId: 31, neighbourhoodName:  "University"),
-            Neighbourhood(neighbourhoodId: 32, neighbourhoodName:  "Yorkville")
-        ]
-        
-        return data
+    func getList(){
+        MapManager.instance.get(url: "https://blocestate-mobile-api.azurewebsites.net/api/lookup/neighbourhoods") { [self]
+            (response, error) in
+            if let result = response {
+                do{
+                    var nList = try JSONDecoder().decode(Neighbourhoods.self, from: result)
+                    var items = nList.data
+                    neighbourhoods = items
+                }catch{
+                    print("something went wrong!")
+                 }
+            }
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredData = searchText.isEmpty ? [] : getList().filter { $0.neighbourhoodName.contains(searchText)}
-        //print(filteredData)
+        filteredData = []
+        var filter = searchText.isEmpty ? [] : neighbourhoods.filter { $0.name.contains(searchText)}
+        if !selectedNeighbourhoods.isEmpty {
+            filteredData.append(contentsOf: selectedNeighbourhoods)
+        }
+        filteredData.append(contentsOf: filter)
         tableView.reloadData()
-        selectedCells = []
     }
 }

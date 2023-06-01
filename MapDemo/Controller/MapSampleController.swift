@@ -39,12 +39,14 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
                     var polygonAnnotations: [PolygonAnnotation] = []
                     var polylineAnnotations: [PolylineAnnotation] = []
                     for geo in geoJson.features {
-                        let coords = geo.geometry.coordinates.first
-                        let identifier = "\(geo.properties.propertyID)"
-                        var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
-                        var lineAnnotation = createPolyline(id: identifier, coords: coords!)
-                        polygonAnnotations.append(polygonAnnotation)
-                        polylineAnnotations.append(lineAnnotation)
+                        if geo.properties.description != ""{
+                            let coords = geo.geometry.coordinates.first
+                            let identifier = "\(geo.properties.propertyID)"
+                            var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
+                            var lineAnnotation = createPolyline(id: identifier, coords: coords!)
+                            polygonAnnotations.append(polygonAnnotation)
+                            polylineAnnotations.append(lineAnnotation)
+                        }
                     }
                     self.polygonAnnotationManager.annotations = polygonAnnotations
                     self.polylineAnnotationManager.annotations = polylineAnnotations
