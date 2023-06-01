@@ -9,8 +9,8 @@ import UIKit
 struct Neighbourhood {
     var neighbourhoodId: Int
     var neighbourhoodName : String
-    //var neighbourhood Image : UIImage
-    //var neighbourhood Desc : String
+    //var neighbourhoodImage : UIImage
+    //var neighbourhoodDesc : String
 }
 class NeighbourhoodTableViewCell : UITableViewCell {
     static let identifier = "NeighbourhoodCell"

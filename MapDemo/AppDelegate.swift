@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
 
-        let welcomePage = LocationSearchController()
+        let welcomePage = MapSampleController()
         let navigationControler = UINavigationController(rootViewController: welcomePage)
         window?.rootViewController = navigationControler
         return true

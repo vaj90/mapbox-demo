@@ -119,9 +119,11 @@ extension MapSampleController: AnnotationInteractionDelegate {
             resetPolyline()
             if let pManager = self.polylineAnnotationManager,
                let idx = pManager.annotations.firstIndex(where:  { $0.id == tappedAnnotation.id }) {
+               
                 var annotation = pManager.annotations[idx]
                 annotation.lineOpacity = 1.0
                 annotation.lineWidth = 2
+                print(annotation.id)
                 pManager.annotations[idx] = annotation
             }
         }
