@@ -39,6 +39,8 @@
 		9FC62EC72A089BD70063ADD8 /* NeighbourhoodGeoJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */; };
 		9FC62EC92A0E94EA0063ADD8 /* MapSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC62EC82A0E94EA0063ADD8 /* MapSearchController.swift */; };
 		9FE6DBA82A1C301A002BA940 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */; };
+		9FE6DBAC2A2A00F5002BA940 /* BuildingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBAB2A2A00F5002BA940 /* BuildingDetails.swift */; };
+		9FE6DBAE2A2A0114002BA940 /* BuildingDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBAD2A2A0114002BA940 /* BuildingDetailsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +93,8 @@
 		9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighbourhoodGeoJson.swift; sourceTree = "<group>"; };
 		9FC62EC82A0E94EA0063ADD8 /* MapSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchController.swift; sourceTree = "<group>"; };
 		9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
+		9FE6DBAB2A2A00F5002BA940 /* BuildingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetails.swift; sourceTree = "<group>"; };
+		9FE6DBAD2A2A0114002BA940 /* BuildingDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetailsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,7 @@
 				9F2CD59129F1112300239067 /* DataLocation.swift */,
 				9F2CD59629F4377A00239067 /* SearchModel.swift */,
 				9FC62EC62A089BD70063ADD8 /* NeighbourhoodGeoJson.swift */,
+				9FE6DBAB2A2A00F5002BA940 /* BuildingDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				9FC62EC12A0831AF0063ADD8 /* MapSampleController.swift */,
 				9FC62EC82A0E94EA0063ADD8 /* MapSearchController.swift */,
 				9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */,
+				9FE6DBAD2A2A0114002BA940 /* BuildingDetailsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -353,7 +359,9 @@
 				9F2CD59E29F44B4700239067 /* IntroInfoController.swift in Sources */,
 				9F2CD5A729F45C3A00239067 /* Extensions.swift in Sources */,
 				9F2CD56C29EEFE4D00239067 /* AppDelegate.swift in Sources */,
+				9FE6DBAE2A2A0114002BA940 /* BuildingDetailsController.swift in Sources */,
 				9FC62EC029FF6E640063ADD8 /* CalendarPageController.swift in Sources */,
+				9FE6DBAC2A2A00F5002BA940 /* BuildingDetails.swift in Sources */,
 				9FC62EC22A0831AF0063ADD8 /* MapSampleController.swift in Sources */,
 				9F2CD59729F4377A00239067 /* SearchModel.swift in Sources */,
 				9FC62EC42A0872940063ADD8 /* MapManager.swift in Sources */,
