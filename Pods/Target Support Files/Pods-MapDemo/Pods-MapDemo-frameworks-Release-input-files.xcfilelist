@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-MapDemo/Pods-MapDemo-frameworks.sh
+${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework
+${BUILT_PRODUCTS_DIR}/Segmentio/Segmentio.framework
+${BUILT_PRODUCTS_DIR}/SwiftCarousel/SwiftCarousel.framework
+${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework
+${BUILT_PRODUCTS_DIR}/ZKCarousel/ZKCarousel.framework

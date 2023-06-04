@@ -1,0 +1,32 @@
+PODS:
+  - FSCalendar (2.8.4)
+  - Segmentio (4.1)
+  - SwiftCarousel (0.8.0)
+  - SwiftRangeSlider (2.0.0)
+  - ZKCarousel (1.1.1)
+
+DEPENDENCIES:
+  - FSCalendar
+  - Segmentio
+  - SwiftCarousel
+  - SwiftRangeSlider
+  - ZKCarousel
+
+SPEC REPOS:
+  trunk:
+    - FSCalendar
+    - Segmentio
+    - SwiftCarousel
+    - SwiftRangeSlider
+    - ZKCarousel
+
+SPEC CHECKSUMS:
+  FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  Segmentio: ab29def64e1bff6e6e9b97671788a99bed3f1d9f
+  SwiftCarousel: a62f4e9b944d1bca4ccfe3f28abb6119e3e36b12
+  SwiftRangeSlider: f86e3b637c961120158fa1a89277c8343845cbe4
+  ZKCarousel: e54940a77f4b635e650ea0361608db836a776feb
+
+PODFILE CHECKSUM: 4e75e1497601cafb64df253075d1cc44383dde5d
+
+COCOAPODS: 1.12.1
