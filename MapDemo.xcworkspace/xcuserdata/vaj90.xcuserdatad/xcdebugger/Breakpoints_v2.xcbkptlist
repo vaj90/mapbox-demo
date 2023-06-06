@@ -36,5 +36,146 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "80BB2213-3B31-4284-A77B-68031DE51054"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapDemo/Controller/LocationSearchController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "80BB2213-3B31-4284-A77B-68031DE51054 - 5b6df885a1fc7790"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapDemo.LocationSearchController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MapDemo.LocationSearchController"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/LocationSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  uuid = "80BB2213-3B31-4284-A77B-68031DE51054 - d6ba9df6e1eacde8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapDemo.LocationSearchController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MapDemo.LocationSearchController"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/LocationSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "197">
+               </Location>
+               <Location
+                  uuid = "80BB2213-3B31-4284-A77B-68031DE51054 - b6bebc2b7fca04ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapDemo.LocationSearchController.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MapDemo.LocationSearchController&gt;"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/LocationSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  uuid = "80BB2213-3B31-4284-A77B-68031DE51054 - f2efb5fbcdd304d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapDemo.LocationSearchController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MapDemo.LocationSearchController&gt;"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/LocationSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "154">
+               </Location>
+               <Location
+                  uuid = "80BB2213-3B31-4284-A77B-68031DE51054 - cbe4091c9287444c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapDemo.LocationSearchController.__deallocating_deinit"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/LocationSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F65C8BA8-ED4E-48AA-89C1-6A21649E3ADA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapDemo/Controller/TagListController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "googleIt(tapGestureRecognizer:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F65C8BA8-ED4E-48AA-89C1-6A21649E3ADA - 5dee037fae0ad878"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapDemo.TagCollectionViewCell.googleIt(tapGestureRecognizer: __C.UITapGestureRecognizer) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/TagListController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "F65C8BA8-ED4E-48AA-89C1-6A21649E3ADA - 5dee037fae0ad878"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapDemo.TagCollectionViewCell.googleIt(tapGestureRecognizer: __C.UITapGestureRecognizer) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/TagListController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "144">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

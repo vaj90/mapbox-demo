@@ -41,6 +41,7 @@
 		9FE6DBA82A1C301A002BA940 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */; };
 		9FE6DBAC2A2A00F5002BA940 /* BuildingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBAB2A2A00F5002BA940 /* BuildingDetails.swift */; };
 		9FE6DBAE2A2A0114002BA940 /* BuildingDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBAD2A2A0114002BA940 /* BuildingDetailsController.swift */; };
+		9FE6DBB02A2F7A7A002BA940 /* TagListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBAF2A2F7A7A002BA940 /* TagListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +96,7 @@
 		9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 		9FE6DBAB2A2A00F5002BA940 /* BuildingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetails.swift; sourceTree = "<group>"; };
 		9FE6DBAD2A2A0114002BA940 /* BuildingDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetailsController.swift; sourceTree = "<group>"; };
+		9FE6DBAF2A2F7A7A002BA940 /* TagListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				9FC62EC82A0E94EA0063ADD8 /* MapSearchController.swift */,
 				9FE6DBA72A1C301A002BA940 /* LocationSearchController.swift */,
 				9FE6DBAD2A2A0114002BA940 /* BuildingDetailsController.swift */,
+				9FE6DBAF2A2F7A7A002BA940 /* TagListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				9F2CD57029EEFE4D00239067 /* ViewController.swift in Sources */,
 				9F2CD59B29F438DB00239067 /* SearchController.swift in Sources */,
 				9F2CD59929F4387800239067 /* SearchViewModel.swift in Sources */,
+				9FE6DBB02A2F7A7A002BA940 /* TagListController.swift in Sources */,
 				9F2CD59229F1112300239067 /* DataLocation.swift in Sources */,
 				9FC62EC92A0E94EA0063ADD8 /* MapSearchController.swift in Sources */,
 				9F2CD59E29F44B4700239067 /* IntroInfoController.swift in Sources */,
