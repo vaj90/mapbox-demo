@@ -8,21 +8,23 @@ import UIKit
 import QuartzCore
 class TagCollectionViewCell : UICollectionViewCell {
     static let identifier = "cell"
-    let link: UILabel = {
+    lazy var link: UILabel = {
         let lbl = UILabel()
         lbl.textColor = UIColor.init(hexString: "#68B2F0")
         lbl.font = UIFont(name:"Ubuntu-Bold", size: 16.0)
-        let taplbl = UITapGestureRecognizer(target: TagCollectionViewCell.self, action: #selector(googleIt))
-        lbl.addGestureRecognizer(taplbl)
-        lbl.isUserInteractionEnabled = true
-        lbl.layer.masksToBounds = true
         lbl.layer.borderColor = UIColor.init(hexString: "#68B2F0").cgColor
         lbl.layer.borderWidth = 1.0
-        lbl.layer.cornerRadius = 10
+        lbl.layer.cornerRadius = 15
+        lbl.textAlignment = .center
+        var taplbl =  UITapGestureRecognizer(target: self, action: #selector(btnClick(_:)))
+        lbl.addGestureRecognizer(taplbl)
+        lbl.isUserInteractionEnabled = true
         return lbl
     }()
-    @objc func googleIt(tapGestureRecognizer: UITapGestureRecognizer){
-        let str = link.text
+
+
+    @objc func btnClick(_ sender: Any){
+        print("click")
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -37,13 +39,15 @@ class TagCollectionViewCell : UICollectionViewCell {
       }
     func addUIItem(){
         addSubview(link)
+        link.layer.masksToBounds = true
         link.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     override func layoutSubviews() {
         let cvSize = contentView.frame.size
-        print("\(Int(cvSize.width))")
-        link.frame = CGRect(x: 0, y: 0, width: cvSize.width + 10, height: cvSize.height)
-        link.sizeToFit()
+        link.frame = CGRect(x: 0, y: 0, width: cvSize.width, height: cvSize.height)
+    }
+    @IBAction func googleIt(_ sender: Any){
+        //let str = link.text
     }
 }
 class TagListController: UIViewController {
@@ -68,7 +72,6 @@ class TagListController: UIViewController {
         collectionview.delegate = self
         collectionview.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         collectionview.showsHorizontalScrollIndicator = false
-        collectionview.backgroundColor = UIColor.white
     }
     lazy var viewBody: UIView = {
         let v  = UIView()
@@ -99,7 +102,6 @@ class TagListController: UIViewController {
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
             width: 0, height: 0)
-        innerv.backgroundColor = .red//UIColor.init(hexString: "#15A9FC")
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         return v
@@ -196,16 +198,17 @@ extension TagListController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //print("\(countries[indexPath.row])")
-        let str = countries[indexPath.row]
+        /*let str = countries[indexPath.row]
         let link = "https://www.google.com/search?q=\(str)"
         if let url = URL(string:link) {
             UIApplication.shared.open(url)
-        }
+        }*/
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = UILabel(frame: CGRect.zero)
         label.text = countries[indexPath.item]
         label.sizeToFit()
-        return CGSize(width: label.frame.width, height: 20)
+        return CGSize(width: label.frame.width + 10, height: 30)
     }
+
 }

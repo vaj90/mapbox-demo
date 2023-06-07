@@ -22,19 +22,25 @@ struct NeighbourhoodItem: Codable {
 }
 class NeighbourhoodTableViewCell : UITableViewCell {
     static let identifier = "NeighbourhoodCell"
-    let cancelImage : UIImageView = {
+    lazy var cancelImage : UIImageView = {
         let _cancelImg = UIImageView()
         let img = UIImage(named:"cross")?.withRenderingMode(.alwaysTemplate)
         _cancelImg.image = img
         _cancelImg.tintColor = UIColor.init(hexString: "#1d82d6")
         _cancelImg.isUserInteractionEnabled = true
+        let tapImg =  UITapGestureRecognizer(target: self, action: #selector(btnClick(_:)))
+        _cancelImg.addGestureRecognizer(tapImg)
+        _cancelImg.isUserInteractionEnabled = true
        return _cancelImg
     }()
+    @objc func btnClick(_ sender: Any){
+        print("click")
+    }
     let neighbourhoodName = UILabel()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        //contentView.addSubview(cancelImage)
+        contentView.addSubview(cancelImage)
         contentView.addSubview(neighbourhoodName)
         self.selectionStyle = .none
     }
@@ -45,8 +51,8 @@ class NeighbourhoodTableViewCell : UITableViewCell {
 
     override func layoutSubviews() {
         let cvSize = contentView.frame.size
-        //cancelImage.frame = CGRect(x: 5, y: 6, width: 30, height: 30)
-        neighbourhoodName.frame = CGRect(x: 10, y: 0, width: cvSize.width, height: cvSize.height)
+        cancelImage.frame = CGRect(x: 5, y: 6, width: 30, height: 30)
+        neighbourhoodName.frame = CGRect(x: 35, y: 0, width: cvSize.width - 35, height: cvSize.height)
     }
     
 }
