@@ -13,7 +13,7 @@ struct Country: Codable {
 }
 class CountryTableViewCell : UITableViewCell {
     static let identifier = "cell"
-    
+
     lazy var countryLbl: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.init(hexString: "#1D82D6")
@@ -39,10 +39,6 @@ class CountryTableViewCell : UITableViewCell {
         countryLbl.text = "\(country.continent.capitalized)"
         let iV = UIScrollView()
         let v = contentView
-        v.addSubview(iV)
-        iV.anchor(top: countryLbl.bottomAnchor, left: v.leftAnchor, bottom: v.bottomAnchor, right: v.rightAnchor,
-                  paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 300)
-        iV.backgroundColor = .cyan
         btns = country!.countries.map {
             createBtn(name: $0)
         }
@@ -50,12 +46,13 @@ class CountryTableViewCell : UITableViewCell {
         var xAxis = 0
         var yAxis = 0
         var lastHeight = 0
-        let innerVSize = 200
+        let innerVSize = Int(self.frame.width) - 70
         var currenBtnSize = 0
         DispatchQueue.main.async {
             self.btns.map{
                 let btn = $0
                 iV.addSubview(btn)
+                
                 let label = UILabel(frame: CGRect.zero)
                 label.text = btn.currentTitle
                 label.sizeToFit()
@@ -72,13 +69,13 @@ class CountryTableViewCell : UITableViewCell {
                 
                 lastHeight = yAxis
             }
-            /*var newFrame = iV.frame
-            newFrame.size.height = CGFloat(lastHeight)*/
+
             print(lastHeight)
-            //let wv = iV.frame.width
-            //iV.frame = CGRect(x: 30, y: 0, width: wv, height:  CGFloat(lastHeight))
-            iV.frame.size.height = CGFloat(lastHeight) + 300
-            //v.frame.size.height =  CGFloat(lastHeight + 150)
+            v.addSubview(iV)
+            iV.anchor(top: self.countryLbl.bottomAnchor, left: v.leftAnchor, bottom: nil, right: v.rightAnchor,
+                      paddingTop: 10, paddingLeft: 0, paddingBottom: 50, paddingRight: 0, width: 0, height: CGFloat(lastHeight))
+            iV.backgroundColor = .red
+            
         }
     }
     
@@ -125,8 +122,8 @@ class NestedSampleController: UIViewController{
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier)
-        tableView.estimatedRowHeight = 500
-        tableView.rowHeight = UITableView.automaticDimension
+        //tableView.estimatedRowHeight = 500
+        //tableView.rowHeight = UITableView.automaticDimension
     }
     
     lazy var viewBody: UIView = {
@@ -232,10 +229,12 @@ extension NestedSampleController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier) as! CountryTableViewCell
         cell.country = countryList[indexPath.row]
         cell.configure()
-        //cell.backgroundColor = .red
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        let cnt = countryList[indexPath.row].countries.count
+        let vHeight = (cnt/3) * 30
+        return CGFloat(vHeight + 50)
     }
+    
 }
