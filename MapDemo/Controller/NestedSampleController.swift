@@ -74,8 +74,6 @@ class CountryTableViewCell : UITableViewCell {
             v.addSubview(iV)
             iV.anchor(top: self.countryLbl.bottomAnchor, left: v.leftAnchor, bottom: nil, right: v.rightAnchor,
                       paddingTop: 10, paddingLeft: 0, paddingBottom: 50, paddingRight: 0, width: 0, height: CGFloat(lastHeight))
-            iV.backgroundColor = .red
-            
         }
     }
     
