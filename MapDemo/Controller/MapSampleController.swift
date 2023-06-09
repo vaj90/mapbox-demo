@@ -17,6 +17,7 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
     var centerCoordinate: CLLocationCoordinate2D!
     var polygonAnnotationManager: PolygonAnnotationManager!
     var polylineAnnotationManager: PolylineAnnotationManager!
+    var selectedNeighbourhoodId : Int!
     var resourceOptions = ResourceOptions(accessToken: "pk.eyJ1IjoiYmxvY2VzdGF0ZTEiLCJhIjoiY2xjeXd6aW40MDAwbzNxbzQ4a2xzMXQ2biJ9.wOAZ-fxbPhXhLouH7uFpcA")
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +40,14 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
                     var polygonAnnotations: [PolygonAnnotation] = []
                     var polylineAnnotations: [PolylineAnnotation] = []
                     for geo in geoJson.features {
-                        if geo.properties.description != ""{
+                        //if geo.properties.description != ""{
                             let coords = geo.geometry.coordinates.first
                             let identifier = "\(geo.properties.propertyID)"
                             var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
                             var lineAnnotation = createPolyline(id: identifier, coords: coords!)
                             polygonAnnotations.append(polygonAnnotation)
                             polylineAnnotations.append(lineAnnotation)
-                        }
+                        //}
                     }
                     self.polygonAnnotationManager.annotations = polygonAnnotations
                     self.polylineAnnotationManager.annotations = polylineAnnotations
@@ -126,6 +127,7 @@ extension MapSampleController: AnnotationInteractionDelegate {
                 annotation.lineOpacity = 1.0
                 annotation.lineWidth = 2
                 print(annotation.id)
+                self.selectedNeighbourhoodId = Int(annotation.id)
                 pManager.annotations[idx] = annotation
             }
         }

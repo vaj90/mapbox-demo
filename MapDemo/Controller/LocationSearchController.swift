@@ -40,7 +40,7 @@ class NeighbourhoodTableViewCell : UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        contentView.addSubview(cancelImage)
+        //contentView.addSubview(cancelImage)
         contentView.addSubview(neighbourhoodName)
         self.selectionStyle = .none
     }
@@ -51,8 +51,8 @@ class NeighbourhoodTableViewCell : UITableViewCell {
 
     override func layoutSubviews() {
         let cvSize = contentView.frame.size
-        cancelImage.frame = CGRect(x: 5, y: 6, width: 30, height: 30)
-        neighbourhoodName.frame = CGRect(x: 35, y: 0, width: cvSize.width - 35, height: cvSize.height)
+        //cancelImage.frame = CGRect(x: 5, y: 6, width: 30, height: 30)
+        neighbourhoodName.frame = CGRect(x: 15, y: 0, width: cvSize.width, height: cvSize.height)
     }
     
 }
@@ -181,6 +181,7 @@ class LocationSearchController: UIViewController {
     
     @objc private func goBack(){
         let vController = MapSearchController()
+        print(selectedCells)
         vController.neighbourhoodIds = selectedCells
         self.navigationController?.pushViewController(vController, animated: true )
     }
