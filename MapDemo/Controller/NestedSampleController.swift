@@ -13,7 +13,6 @@ struct Country: Codable {
 }
 class CountryTableViewCell : UITableViewCell {
     static let identifier = "cell"
-
     lazy var countryLbl: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.init(hexString: "#1D82D6")
@@ -31,7 +30,18 @@ class CountryTableViewCell : UITableViewCell {
         btn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner ]
         btn.layer.borderColor = UIColor.init(hexString: "#1D82D6").cgColor
         btn.layer.borderWidth = 2
+        let img = UIImage(named:"star")?.withRenderingMode(.alwaysTemplate)
+        btn.setImage(img, for: .normal)
+        btn.imageView?.contentMode = .scaleAspectFit
+        btn.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         return btn
+    }
+    @objc private func btnClick(_ sender: UIButton){
+        let btn = sender
+        if let title = btn.currentTitle {
+            print(title)
+        }
     }
     var btns: [UIButton]!
     var country: Country!
@@ -46,7 +56,7 @@ class CountryTableViewCell : UITableViewCell {
         var xAxis = 0
         var yAxis = 0
         var lastHeight = 0
-        let innerVSize = Int(self.frame.width) - 70
+        let innerVSize = Int(self.frame.width) - 90
         var currenBtnSize = 0
         DispatchQueue.main.async {
             self.btns.map{
@@ -57,7 +67,7 @@ class CountryTableViewCell : UITableViewCell {
                 label.text = btn.currentTitle
                 label.sizeToFit()
                 
-                let len =  Int(CGFloat(label.frame.width + 10))
+                let len =  Int(CGFloat(label.frame.width + 45))
                 btn.frame = CGRect(x: xAxis, y: yAxis, width: len, height: 30)
                 currenBtnSize = currenBtnSize + len
                 xAxis = xAxis + len + 5
@@ -227,12 +237,13 @@ extension NestedSampleController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier) as! CountryTableViewCell
         cell.country = countryList[indexPath.row]
         cell.configure()
+    
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cnt = countryList[indexPath.row].countries.count
-        let vHeight = (cnt/3) * 30
-        return CGFloat(vHeight + 50)
+        let vHeight = (cnt/3) * 40
+        return CGFloat(vHeight + 140)
     }
-    
+
 }
