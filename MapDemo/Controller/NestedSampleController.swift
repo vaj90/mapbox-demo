@@ -34,7 +34,7 @@ class CountryTableViewCell : UITableViewCell {
         btn.setImage(img, for: .normal)
         btn.imageView?.contentMode = .scaleAspectFit
         btn.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         return btn
     }
     @objc private func btnClick(_ sender: UIButton){
@@ -47,7 +47,7 @@ class CountryTableViewCell : UITableViewCell {
     var country: Country!
     func configure(){
         countryLbl.text = "\(country.continent.capitalized)"
-        let iV = UIScrollView()
+        let iV = UIView()
         let v = contentView
         btns = country!.countries.map {
             createBtn(name: $0)
@@ -61,7 +61,6 @@ class CountryTableViewCell : UITableViewCell {
         DispatchQueue.main.async {
             self.btns.map{
                 let btn = $0
-                iV.addSubview(btn)
                 
                 let label = UILabel(frame: CGRect.zero)
                 label.text = btn.currentTitle
@@ -75,15 +74,14 @@ class CountryTableViewCell : UITableViewCell {
                     yAxis = yAxis + 40
                     xAxis = 0
                     currenBtnSize =   0
+                    lastHeight = yAxis + 40
                 }
-                
-                lastHeight = yAxis
+                iV.addSubview(btn)
             }
-
-            print(lastHeight)
             v.addSubview(iV)
             iV.anchor(top: self.countryLbl.bottomAnchor, left: v.leftAnchor, bottom: nil, right: v.rightAnchor,
                       paddingTop: 10, paddingLeft: 0, paddingBottom: 50, paddingRight: 0, width: 0, height: CGFloat(lastHeight))
+            //iV.backgroundColor = .red
         }
     }
     
@@ -237,13 +235,13 @@ extension NestedSampleController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier) as! CountryTableViewCell
         cell.country = countryList[indexPath.row]
         cell.configure()
-    
+        //cell.backgroundColor = .cyan
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cnt = countryList[indexPath.row].countries.count
         let vHeight = (cnt/3) * 40
-        return CGFloat(vHeight + 140)
+        return CGFloat(vHeight + 160)
     }
 
 }

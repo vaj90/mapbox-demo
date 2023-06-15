@@ -146,6 +146,9 @@ class TagListController: UIViewController {
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         v.layer.zPosition = 1
+        v.layer.borderWidth = 1
+        v.layer.borderColor = UIColor.gray.cgColor
+        
         return v
     }()
     
