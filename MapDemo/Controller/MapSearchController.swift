@@ -370,6 +370,7 @@ extension MapSearchController: AnnotationInteractionDelegate {
                 if let userInfo = pAnnotation.userInfo {
                     let title: String = userInfo["title"] as! String
                     locationTitle.text = title
+                    print(title)
                 }
             }
         }

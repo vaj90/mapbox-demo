@@ -144,5 +144,147 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FDE477DA-73D0-487F-A7D0-8C5AC61E21BA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapDemo/Controller/MapSearchController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
+            landmarkName = "annotationManager(_:didDetectTappedAnnotations:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4A83796-68B2-4D14-AAB6-5B7FC06F1BEB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapDemo/Controller/MapSearchController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
+            landmarkName = "annotationManager(_:didDetectTappedAnnotations:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E4A83796-68B2-4D14-AAB6-5B7FC06F1BEB - df945c86e4670e33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in MapDemo.MapSearchController.annotationManager(_: MapboxMaps.AnnotationManager, didDetectTappedAnnotations: Swift.Array&lt;MapboxMaps.Annotation&gt;) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "1353">
+               </Location>
+               <Location
+                  uuid = "E4A83796-68B2-4D14-AAB6-5B7FC06F1BEB - df945c86e4670e33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in MapDemo.MapSearchController.annotationManager(_: MapboxMaps.AnnotationManager, didDetectTappedAnnotations: Swift.Array&lt;MapboxMaps.Annotation&gt;) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "1578">
+               </Location>
+               <Location
+                  uuid = "E4A83796-68B2-4D14-AAB6-5B7FC06F1BEB - 473f11e86e4a657f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (MapboxMaps.PolygonAnnotation) -&gt; Swift.Bool in closure #1 @Swift.MainActor () -&gt; () in MapDemo.MapSearchController.annotationManager(_: MapboxMaps.AnnotationManager, didDetectTappedAnnotations: Swift.Array&lt;MapboxMaps.Annotation&gt;) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ACA72781-0C83-4C2B-B3C6-AEEE3B2B6163"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapDemo/Controller/MapSearchController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "annotationManager(_:didDetectTappedAnnotations:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "ACA72781-0C83-4C2B-B3C6-AEEE3B2B6163 - df945c86e4670f2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in MapDemo.MapSearchController.annotationManager(_: MapboxMaps.AnnotationManager, didDetectTappedAnnotations: Swift.Array&lt;MapboxMaps.Annotation&gt;) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "354"
+                  endingLineNumber = "354"
+                  offsetFromSymbolStart = "617">
+               </Location>
+               <Location
+                  uuid = "ACA72781-0C83-4C2B-B3C6-AEEE3B2B6163 - df945c86e4670f2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in MapDemo.MapSearchController.annotationManager(_: MapboxMaps.AnnotationManager, didDetectTappedAnnotations: Swift.Array&lt;MapboxMaps.Annotation&gt;) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "354"
+                  endingLineNumber = "354"
+                  offsetFromSymbolStart = "867">
+               </Location>
+               <Location
+                  uuid = "ACA72781-0C83-4C2B-B3C6-AEEE3B2B6163 - dded10eea49fd47c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (MapboxMaps.PolylineAnnotation) -&gt; Swift.Bool in closure #1 @Swift.MainActor () -&gt; () in MapDemo.MapSearchController.annotationManager(_: MapboxMaps.AnnotationManager, didDetectTappedAnnotations: Swift.Array&lt;MapboxMaps.Annotation&gt;) -&gt; ()"
+                  moduleName = "MapDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "354"
+                  endingLineNumber = "354"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

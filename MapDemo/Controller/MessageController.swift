@@ -112,6 +112,7 @@ class MessageController: UIViewController {
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
             width: 0, height: 0)
+        //cV.backgroundColor = .red
         return v
     }()
     var msgLabel : UILabel = {
@@ -207,9 +208,14 @@ class MessageController: UIViewController {
     func setUpView(){
         let height = navigationController?.navigationBar.frame.maxY
         navigationController?.navigationBar.isHidden = true
-        let border: CALayer = CALayer()
-        border.frame = CGRectMake(0.0, 0.0, view.frame.size.width, 1.0)
-        border.backgroundColor = UIColor.gray.cgColor
+        let borderBotNav: CALayer = CALayer()
+        borderBotNav.frame = CGRectMake(0.0, 0.0, view.frame.size.width, 1.0)
+        borderBotNav.backgroundColor = UIColor.lightGray.cgColor
+        
+        let tHeight = view.frame.size.height
+        let borderTopNav: CALayer = CALayer()
+        borderTopNav.frame =  CGRect(x: 0, y: tHeight - 0.5, width: view.frame.size.width, height: 0.5)
+        borderTopNav.backgroundColor = UIColor.lightGray.cgColor
 
         view.addSubview(topNav)
         topNav.anchor(
@@ -218,16 +224,16 @@ class MessageController: UIViewController {
             paddingTop: 60, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
             width: 0, height: /*height?.native ??*/ 50)
-        
+        topNav.layer.addSublayer(borderTopNav)
         
         view.addSubview(bottomNav)
         bottomNav.anchor(
             top: nil, left: view.leftAnchor,
             bottom: view.bottomAnchor, right: view.rightAnchor,
-            paddingTop: 10, paddingLeft: 10,
-            paddingBottom: 10, paddingRight: 10,
+            paddingTop: 10, paddingLeft: 0,
+            paddingBottom: 10, paddingRight: 0,
             width: 0, height: 65)
-        bottomNav.layer.addSublayer(border)
+        bottomNav.layer.addSublayer(borderBotNav)
         
         
         view.addSubview(viewBody)
@@ -259,7 +265,14 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageCollectionViewCell.identifier, for: indexPath) as! MessageCollectionViewCell
         cell.msgDetail = messages[indexPath.row]
+        
         cell.configure()
+        let bottomLine = CALayer()
+        let h = cell.frame.height - 4
+        bottomLine.frame = CGRectMake(0.0, h, cell.frame.width, 1.0)
+        bottomLine.backgroundColor = UIColor.lightGray.cgColor
+        cell.layer.addSublayer(bottomLine)
+        //cell.backgroundColor = .cyan
         return cell
     }
 
@@ -269,6 +282,6 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
         let approximateWidth = view.frame.width
         let size  = CGSize(width: approximateWidth, height: 100)
         let estimatedFrame = NSString(string: msg.messageInfo).boundingRect(with: size,options: .usesLineFragmentOrigin, context: nil)
-        return CGSize(width: approximateWidth - 30, height: estimatedFrame.height + 50)
+        return CGSize(width: approximateWidth, height: estimatedFrame.height + 70)
     }
 }

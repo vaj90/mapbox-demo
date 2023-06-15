@@ -40,14 +40,18 @@ class MapSampleController: UIViewController, CLLocationManagerDelegate {
                     var polygonAnnotations: [PolygonAnnotation] = []
                     var polylineAnnotations: [PolylineAnnotation] = []
                     for geo in geoJson.features {
-                        //if geo.properties.description != ""{
+                        if geo.properties.title != "" {
                             let coords = geo.geometry.coordinates.first
                             let identifier = "\(geo.properties.propertyID)"
                             var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
                             var lineAnnotation = createPolyline(id: identifier, coords: coords!)
+                            polygonAnnotation.userInfo = [
+                                "title": geo.properties.title,
+                                "description": geo.properties.description
+                            ]
                             polygonAnnotations.append(polygonAnnotation)
                             polylineAnnotations.append(lineAnnotation)
-                        //}
+                        }
                     }
                     self.polygonAnnotationManager.annotations = polygonAnnotations
                     self.polylineAnnotationManager.annotations = polylineAnnotations
@@ -129,6 +133,14 @@ extension MapSampleController: AnnotationInteractionDelegate {
                 print(annotation.id)
                 self.selectedNeighbourhoodId = Int(annotation.id)
                 pManager.annotations[idx] = annotation
+            }
+            if let polyManager = self.polygonAnnotationManager,
+                let selectedAnnotation = polyManager.annotations.firstIndex(where:  { $0.id == tappedAnnotation.id }) {
+                var pAnnotation = polyManager.annotations[selectedAnnotation]
+                if let userInfo = pAnnotation.userInfo {
+                    let title: String = userInfo["title"] as! String
+                    print(title)
+                }
             }
         }
     }
