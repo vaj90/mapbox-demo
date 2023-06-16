@@ -44,6 +44,7 @@
 		9FE6DBB02A2F7A7A002BA940 /* TagListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBAF2A2F7A7A002BA940 /* TagListController.swift */; };
 		9FE6DBB42A305347002BA940 /* NestedSampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBB32A305347002BA940 /* NestedSampleController.swift */; };
 		9FE6DBB62A3ADAA7002BA940 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBB52A3ADAA7002BA940 /* MessageController.swift */; };
+		9FE6DBB82A3CAC06002BA940 /* RequestViewingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBB72A3CAC06002BA940 /* RequestViewingController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -101,6 +102,7 @@
 		9FE6DBAF2A2F7A7A002BA940 /* TagListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListController.swift; sourceTree = "<group>"; };
 		9FE6DBB32A305347002BA940 /* NestedSampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedSampleController.swift; sourceTree = "<group>"; };
 		9FE6DBB52A3ADAA7002BA940 /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
+		9FE6DBB72A3CAC06002BA940 /* RequestViewingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewingController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 				9FE6DBAF2A2F7A7A002BA940 /* TagListController.swift */,
 				9FE6DBB32A305347002BA940 /* NestedSampleController.swift */,
 				9FE6DBB52A3ADAA7002BA940 /* MessageController.swift */,
+				9FE6DBB72A3CAC06002BA940 /* RequestViewingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				9FE6DBB42A305347002BA940 /* NestedSampleController.swift in Sources */,
 				9F2CD57029EEFE4D00239067 /* ViewController.swift in Sources */,
 				9F2CD59B29F438DB00239067 /* SearchController.swift in Sources */,
+				9FE6DBB82A3CAC06002BA940 /* RequestViewingController.swift in Sources */,
 				9F2CD59929F4387800239067 /* SearchViewModel.swift in Sources */,
 				9FE6DBB02A2F7A7A002BA940 /* TagListController.swift in Sources */,
 				9F2CD59229F1112300239067 /* DataLocation.swift in Sources */,

@@ -39,30 +39,11 @@ class MessageCollectionViewCell : UICollectionViewCell {
         addSubview(imgMessage)
         addSubview(msgName)
         addSubview(msgInfo)
-        
-        imgMessage.anchor(
-            top: self.topAnchor, left: self.leftAnchor,
-            bottom: nil, right: nil,
-            paddingTop: 10, paddingLeft: 10,
-            paddingBottom: 0, paddingRight:10,
-            width: 32, height: 32)
-        msgName.anchor(
-            top: self.topAnchor, left: imgMessage.rightAnchor,
-            bottom: nil, right: self.rightAnchor,
-            paddingTop: 10, paddingLeft: 10,
-            paddingBottom: 0, paddingRight: 20,
-            width: 0, height: 40)
-        msgInfo.anchor(
-            top: msgName.bottomAnchor, left: imgMessage.rightAnchor,
-            bottom: nil, right: self.rightAnchor,
-            paddingTop: 0, paddingLeft: 10,
-            paddingBottom: 10, paddingRight: 20,
-            width: 0, height: 0)
     }
     func configure(){
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .justified
-        paragraph.baseWritingDirection = .leftToRight
+        paragraph.baseWritingDirection = msgDetail.msgType == 1 ? .leftToRight : .rightToLeft
         let attrBold = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Bold", size: 16)];
         let attrLight = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Light", size: 12)];
         let msgNameAttr = NSMutableAttributedString()
@@ -75,6 +56,27 @@ class MessageCollectionViewCell : UICollectionViewCell {
         msgInfoAttr.append(NSAttributedString(string: "\(msgDetail.messageInfo)", attributes: attrLight as [NSAttributedString.Key : Any]))
         msgInfoAttr.addAttribute(.paragraphStyle, value: paragraph, range: NSRange(location: 0, length: msgInfoAttr.length))
         msgInfo.attributedText = msgInfoAttr
+        positionUIItem()
+    }
+    func positionUIItem(){
+        imgMessage.anchor(
+            top: self.topAnchor, left: msgDetail.msgType == 1 ? self.leftAnchor : nil,
+            bottom: nil, right: msgDetail.msgType == 1 ? nil : self.rightAnchor,
+            paddingTop: 10, paddingLeft: 10,
+            paddingBottom: 0, paddingRight:10,
+            width: 32, height: 32)
+        msgName.anchor(
+            top: self.topAnchor, left: msgDetail.msgType == 1 ? imgMessage.rightAnchor : self.leftAnchor,
+            bottom: nil, right: msgDetail.msgType == 1 ? self.rightAnchor : imgMessage.leftAnchor,
+            paddingTop: 10, paddingLeft: 10,
+            paddingBottom: 0, paddingRight: 20,
+            width: 0, height: 40)
+        msgInfo.anchor(
+            top: msgName.bottomAnchor, left: msgDetail.msgType == 1 ? imgMessage.rightAnchor : self.leftAnchor,
+            bottom: nil, right: msgDetail.msgType == 1 ? self.rightAnchor : imgMessage.leftAnchor,
+            paddingTop: 0, paddingLeft: 10,
+            paddingBottom: 10, paddingRight: 20,
+            width: 0, height: 0)
     }
     override init(frame: CGRect) {
       super.init(frame: frame)
@@ -86,6 +88,16 @@ class MessageController: UIViewController {
     var cV: UICollectionView!
     var messages: [Message] = [
         Message(name: "Allan", messageInfo: "Thank you for ordering from Oh My Gulay!. We're currently preparing your order.", msgType: 1, dateTime: "01/30/2023 11:48 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 2, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 2, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 1, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 2, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 1, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 1, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 2, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 1, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 2, dateTime: "02/01/2023 09:30 PM"),
+        Message(name: "John", messageInfo: "Thanks again.", msgType: 1, dateTime: "02/01/2023 09:30 PM"),
         Message(name: "John", messageInfo: "Thanks again.", msgType: 2, dateTime: "02/01/2023 09:30 PM"),
     ]
     override func viewDidLoad() {
@@ -208,14 +220,6 @@ class MessageController: UIViewController {
     func setUpView(){
         let height = navigationController?.navigationBar.frame.maxY
         navigationController?.navigationBar.isHidden = true
-        let borderBotNav: CALayer = CALayer()
-        borderBotNav.frame = CGRectMake(0.0, 0.0, view.frame.size.width, 1.0)
-        borderBotNav.backgroundColor = UIColor.lightGray.cgColor
-        
-        let tHeight = view.frame.size.height
-        let borderTopNav: CALayer = CALayer()
-        borderTopNav.frame =  CGRect(x: 0, y: tHeight - 0.5, width: view.frame.size.width, height: 0.5)
-        borderTopNav.backgroundColor = UIColor.lightGray.cgColor
 
         view.addSubview(topNav)
         topNav.anchor(
@@ -224,6 +228,11 @@ class MessageController: UIViewController {
             paddingTop: 60, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
             width: 0, height: /*height?.native ??*/ 50)
+        
+        let borderTopNav: CALayer = CALayer()
+        borderTopNav.frame = CGRectMake(0.0, 49, view.frame.size.width, 0.5)
+        borderTopNav.masksToBounds = true
+        borderTopNav.backgroundColor = UIColor.lightGray.cgColor
         topNav.layer.addSublayer(borderTopNav)
         
         view.addSubview(bottomNav)
@@ -233,6 +242,9 @@ class MessageController: UIViewController {
             paddingTop: 10, paddingLeft: 0,
             paddingBottom: 10, paddingRight: 0,
             width: 0, height: 65)
+        let borderBotNav: CALayer = CALayer()
+        borderBotNav.frame = CGRectMake(0.0, 0.0, view.frame.size.width, 0.5)
+        borderBotNav.backgroundColor = UIColor.lightGray.cgColor
         bottomNav.layer.addSublayer(borderBotNav)
         
         
@@ -269,7 +281,7 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
         cell.configure()
         let bottomLine = CALayer()
         let h = cell.frame.height - 4
-        bottomLine.frame = CGRectMake(0.0, h, cell.frame.width, 1.0)
+        bottomLine.frame = CGRectMake(0.0, h, cell.frame.width, 0.5)
         bottomLine.backgroundColor = UIColor.lightGray.cgColor
         cell.layer.addSublayer(bottomLine)
         //cell.backgroundColor = .cyan
