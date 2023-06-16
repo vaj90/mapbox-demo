@@ -41,15 +41,15 @@ class RequestViewingController: UIViewController {
         imgE.anchor(
             top: v.topAnchor, left: v.leftAnchor,
             bottom: v.bottomAnchor, right: nil,
-            paddingTop: 15, paddingLeft: 30,
-            paddingBottom: 15, paddingRight: 0,
+            paddingTop: 20, paddingLeft: 30,
+            paddingBottom: 20, paddingRight: 0,
             width: 30, height: 30)
         v.addSubview(imgA)
         imgA.anchor(
             top: v.topAnchor, left: nil,
             bottom: v.bottomAnchor, right: v.rightAnchor,
-            paddingTop: 15, paddingLeft: 0,
-            paddingBottom: 15, paddingRight: 30,
+            paddingTop: 20, paddingLeft: 0,
+            paddingBottom: 20, paddingRight: 30,
             width: 30, height: 30)
         v.addSubview(lbl)
         lbl.anchor(
@@ -107,9 +107,9 @@ class RequestViewingController: UIViewController {
         optCon.anchor(
             top: lblRequest.bottomAnchor, left: v.leftAnchor,
             bottom: nil, right: v.rightAnchor,
-            paddingTop: 40, paddingLeft: 10,
-            paddingBottom: 0, paddingRight: 10,
-            width: 0, height: 180)
+            paddingTop: 40, paddingLeft: 0,
+            paddingBottom: 0, paddingRight: 0,
+            width: 0, height: 210)
         
         optCon.addSubview(dateCon)
         dateCon.anchor(
@@ -117,21 +117,21 @@ class RequestViewingController: UIViewController {
             bottom: nil, right: optCon.rightAnchor,
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
-            width: 0, height: 60)
+            width: 0, height: 70)
         optCon.addSubview(timeCon)
         timeCon.anchor(
             top: dateCon.bottomAnchor, left: optCon.leftAnchor,
             bottom: nil, right: optCon.rightAnchor,
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
-            width: 0, height: 60)
+            width: 0, height: 70)
         optCon.addSubview(paxCon)
         paxCon.anchor(
             top: timeCon.bottomAnchor, left: optCon.leftAnchor,
             bottom: nil, right: optCon.rightAnchor,
             paddingTop: 0, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
-            width: 0, height: 60)
+            width: 0, height: 70)
         
         
         v.addSubview(lblAgreement)
