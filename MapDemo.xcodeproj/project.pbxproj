@@ -46,6 +46,7 @@
 		9FE6DBB62A3ADAA7002BA940 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBB52A3ADAA7002BA940 /* MessageController.swift */; };
 		9FE6DBB82A3CAC06002BA940 /* RequestViewingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBB72A3CAC06002BA940 /* RequestViewingController.swift */; };
 		9FE6DBBC2A3CD180002BA940 /* ConfirmationViewingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBBB2A3CD180002BA940 /* ConfirmationViewingController.swift */; };
+		9FE6DBBE2A42BDF0002BA940 /* DateSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBBD2A42BDF0002BA940 /* DateSelectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -105,6 +106,7 @@
 		9FE6DBB52A3ADAA7002BA940 /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		9FE6DBB72A3CAC06002BA940 /* RequestViewingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewingController.swift; sourceTree = "<group>"; };
 		9FE6DBBB2A3CD180002BA940 /* ConfirmationViewingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewingController.swift; sourceTree = "<group>"; };
+		9FE6DBBD2A42BDF0002BA940 /* DateSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				9FE6DBB52A3ADAA7002BA940 /* MessageController.swift */,
 				9FE6DBB72A3CAC06002BA940 /* RequestViewingController.swift */,
 				9FE6DBBB2A3CD180002BA940 /* ConfirmationViewingController.swift */,
+				9FE6DBBD2A42BDF0002BA940 /* DateSelectionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE6DBBE2A42BDF0002BA940 /* DateSelectionController.swift in Sources */,
 				9FE6DBB42A305347002BA940 /* NestedSampleController.swift in Sources */,
 				9F2CD57029EEFE4D00239067 /* ViewController.swift in Sources */,
 				9F2CD59B29F438DB00239067 /* SearchController.swift in Sources */,

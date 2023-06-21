@@ -91,6 +91,8 @@ class RequestViewingController: UIViewController {
         let optCon = UIView()
         optCon.backgroundColor = UIColor.init(hexString: "#e9ebed")
         let dateCon = createOptionView(imgName: "calendar", lblTitle: "DATE")
+        dateCon.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (datePick (_:))))
+        
         let timeCon = createOptionView(imgName: "time", lblTitle: "TIME")
         let paxCon = createOptionView(imgName: "user", lblTitle: "PARTY COUNT(OPTIONAL)")
         
@@ -241,12 +243,18 @@ class RequestViewingController: UIViewController {
             width: 0, height: 0)
 
     }
-    
+    @objc func datePick(_ sender:UITapGestureRecognizer){
+        let vc =  DateSelectionController()
+        vc.modalPresentationStyle = .formSheet
+        self.present(vc, animated: true)
+    }
     @objc private func goBack(){
        self.navigationController?.popViewController(animated: true )
     }
+    @objc private func dataSelection(){
+            
+    }
     @objc private func goSubmit(){
-        let nextController = SearchController()
-       self.navigationController?.pushViewController(nextController, animated: true )
+
     }
 }

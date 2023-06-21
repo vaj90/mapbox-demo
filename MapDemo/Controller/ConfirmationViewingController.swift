@@ -105,7 +105,7 @@ class ConfirmationViewingController: UIViewController {
             bottom: innerView.bottomAnchor, right: innerView.rightAnchor,
             paddingTop: 30, paddingLeft: 0,
             paddingBottom: 0, paddingRight: 0,
-            width: 0, height: 50)
+            width: 0, height: 60)
         
         innerView.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
         //innerView.centerYAnchor.constraint(equalTo: v.centerYAnchor).isActive = true
