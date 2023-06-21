@@ -7,7 +7,13 @@
 
 import UIKit
 
-class RequestViewingController: UIViewController {
+class RequestViewingController: UIViewController, SelectDateDelegate {
+    var dateSelected: String!
+    func selectDate(date: String) {
+        print(date);
+        dateSelected = date
+    }
+    
     
     lazy var paragraph: NSMutableParagraphStyle =  {
         let p = NSMutableParagraphStyle()
@@ -246,6 +252,7 @@ class RequestViewingController: UIViewController {
     @objc func datePick(_ sender:UITapGestureRecognizer){
         let vc =  DateSelectionController()
         vc.modalPresentationStyle = .formSheet
+        vc.delegate = self
         self.present(vc, animated: true)
     }
     @objc private func goBack(){

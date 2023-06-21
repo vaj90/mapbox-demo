@@ -7,7 +7,9 @@
 
 import UIKit
 import FSCalendar
+
 class DateSelectionController: UIViewController, FSCalendarDelegate  {
+    var delegate : SelectDateDelegate?
     var calendar: FSCalendar!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +50,11 @@ class DateSelectionController: UIViewController, FSCalendarDelegate  {
         viewBody.layer.shadowRadius = 5
     }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-           let formatter = DateFormatter()
-           formatter.dateFormat = "MM/dd/yyyy"
-           let result = formatter.string(from: date)
-        print("Date: \(result)")
-    }   
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        let result = formatter.string(from: date)
+        delegate?.selectDate(date: result)
+    }
    
 }
 
