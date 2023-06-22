@@ -7,15 +7,21 @@
 
 import UIKit
 
-class RequestViewingController: UIViewController, SelectDateDelegate, SelectPassengerDelegate {
+class RequestViewingController: UIViewController, SelectDateDelegate, SelectPassengerDelegate, SelectTimeDelegate {
     var dateSelected: String!
     var paxCnt: Int = 0
+    var timeSelected: String!
     let date = Date()
     let dateFormatter = DateFormatter()
     func selectDate(date: String) {
         print(date)
         dateSelected = date
         lblDate.text = date
+    }
+    func selectTime(time: String) {
+        print(time)
+        timeSelected = time
+        lblTime.text = time
     }
     func selectPax(paxCount: Int) {
         print(paxCount)
@@ -127,6 +133,7 @@ class RequestViewingController: UIViewController, SelectDateDelegate, SelectPass
         
         lblTime.text = "TIME"
         let timeCon = createOptionView(imgName: "time", lbl: lblTime)
+        timeCon.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (timePick (_:))))
         
         lblPax.text = "0 PAX"
         let paxCon = createOptionView(imgName: "user", lbl: lblPax)
@@ -285,7 +292,10 @@ class RequestViewingController: UIViewController, SelectDateDelegate, SelectPass
         self.present(vc, animated: true)
     }
     @objc func timePick(_ sender:UITapGestureRecognizer){
-
+        let vc =  TimeSelectionController()
+        vc.modalPresentationStyle = .formSheet
+        vc.delegate = self
+        self.present(vc, animated: true)
     }
     @objc func paxPick(_ sender:UITapGestureRecognizer){
         let vc =  PaxSelectionController()

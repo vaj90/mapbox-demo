@@ -1,16 +1,14 @@
 //
-//  DateSelectionController.swift
+//  TimeSelectionController.swift
 //  MapDemo
 //
-//  Created by Allan John Valiente on 2023-06-21.
+//  Created by Allan John Valiente on 2023-06-22.
 //
-
 import UIKit
-import FSCalendar
 
-class DateSelectionController: UIViewController, FSCalendarDelegate  {
-    var delegate : SelectDateDelegate?
-    var calendar: FSCalendar!
+class TimeSelectionController: UIViewController  {
+    var delegate : SelectTimeDelegate?
+    var timePick: String!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
@@ -18,15 +16,8 @@ class DateSelectionController: UIViewController, FSCalendarDelegate  {
     }
     lazy var viewBody: UIView = {
         let v  = UIView()
-        calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 300, height: 350))
-        v.addSubview(calendar)
-        calendar.anchor(
-            top: v.topAnchor, left: v.leftAnchor,
-            bottom: v.bottomAnchor, right: v.rightAnchor,
-            paddingTop: 20, paddingLeft: 20,
-            paddingBottom: 20, paddingRight: 20,
-            width: v.frame.width, height: v.frame.height)
-        calendar.delegate = self
+
+     
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
         return v
@@ -49,13 +40,9 @@ class DateSelectionController: UIViewController, FSCalendarDelegate  {
         viewBody.layer.shadowOffset = .zero
         viewBody.layer.shadowRadius = 5
     }
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM dd, yyyy"
-        let result = formatter.string(from: date)
-        delegate?.selectDate(date: result)
+    @objc func submitPax(){
+        delegate?.selectTime(time: timePick)
         self.dismiss(animated: true)
     }
-   
 }
 

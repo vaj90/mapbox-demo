@@ -50,6 +50,8 @@
 		9FE6DBC12A42C669002BA940 /* SelectDateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC02A42C669002BA940 /* SelectDateDelegate.swift */; };
 		9FE6DBC32A44207E002BA940 /* PaxSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC22A44207E002BA940 /* PaxSelectionController.swift */; };
 		9FE6DBC52A44215F002BA940 /* SelectPassengerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC42A44215F002BA940 /* SelectPassengerDelegate.swift */; };
+		9FE6DBC72A4437C1002BA940 /* SelectTimeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC62A4437C1002BA940 /* SelectTimeDelegate.swift */; };
+		9FE6DBC92A443807002BA940 /* TimeSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC82A443807002BA940 /* TimeSelectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -113,6 +115,8 @@
 		9FE6DBC02A42C669002BA940 /* SelectDateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateDelegate.swift; sourceTree = "<group>"; };
 		9FE6DBC22A44207E002BA940 /* PaxSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaxSelectionController.swift; sourceTree = "<group>"; };
 		9FE6DBC42A44215F002BA940 /* SelectPassengerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPassengerDelegate.swift; sourceTree = "<group>"; };
+		9FE6DBC62A4437C1002BA940 /* SelectTimeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeDelegate.swift; sourceTree = "<group>"; };
+		9FE6DBC82A443807002BA940 /* TimeSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +231,7 @@
 				9FE6DBBB2A3CD180002BA940 /* ConfirmationViewingController.swift */,
 				9FE6DBBD2A42BDF0002BA940 /* DateSelectionController.swift */,
 				9FE6DBC22A44207E002BA940 /* PaxSelectionController.swift */,
+				9FE6DBC82A443807002BA940 /* TimeSelectionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 			children = (
 				9FE6DBC02A42C669002BA940 /* SelectDateDelegate.swift */,
 				9FE6DBC42A44215F002BA940 /* SelectPassengerDelegate.swift */,
+				9FE6DBC62A4437C1002BA940 /* SelectTimeDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -395,9 +401,11 @@
 				9F2CD59929F4387800239067 /* SearchViewModel.swift in Sources */,
 				9FE6DBB02A2F7A7A002BA940 /* TagListController.swift in Sources */,
 				9F2CD59229F1112300239067 /* DataLocation.swift in Sources */,
+				9FE6DBC72A4437C1002BA940 /* SelectTimeDelegate.swift in Sources */,
 				9FC62EC92A0E94EA0063ADD8 /* MapSearchController.swift in Sources */,
 				9FE6DBBC2A3CD180002BA940 /* ConfirmationViewingController.swift in Sources */,
 				9F2CD59E29F44B4700239067 /* IntroInfoController.swift in Sources */,
+				9FE6DBC92A443807002BA940 /* TimeSelectionController.swift in Sources */,
 				9F2CD5A729F45C3A00239067 /* Extensions.swift in Sources */,
 				9F2CD56C29EEFE4D00239067 /* AppDelegate.swift in Sources */,
 				9FE6DBAE2A2A0114002BA940 /* BuildingDetailsController.swift in Sources */,
