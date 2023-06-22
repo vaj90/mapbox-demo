@@ -7,12 +7,42 @@
 
 import UIKit
 
-class RequestViewingController: UIViewController, SelectDateDelegate {
+class RequestViewingController: UIViewController, SelectDateDelegate, SelectPassengerDelegate {
     var dateSelected: String!
+    var paxCnt: Int = 0
+    let date = Date()
+    let dateFormatter = DateFormatter()
     func selectDate(date: String) {
-        print(date);
+        print(date)
         dateSelected = date
+        lblDate.text = date
     }
+    func selectPax(paxCount: Int) {
+        print(paxCount)
+        paxCnt = paxCount
+        lblPax.text = "\(paxCount) PAX"
+    }
+    lazy var lblDate: UILabel =  {
+        var lbl = UILabel()
+        lbl.textColor = UIColor.init(hexString: "#1D82D6")
+        lbl.textAlignment = .left
+        lbl.font = UIFont(name:"Ubuntu-Bold", size: 16)
+        return lbl
+    }()
+    lazy var lblTime: UILabel =  {
+        var lbl = UILabel()
+        lbl.textColor = UIColor.init(hexString: "#1D82D6")
+        lbl.textAlignment = .left
+        lbl.font = UIFont(name:"Ubuntu-Bold", size: 16)
+        return lbl
+    }()
+    lazy var lblPax: UILabel =  {
+        var lbl = UILabel()
+        lbl.textColor = UIColor.init(hexString: "#1D82D6")
+        lbl.textAlignment = .left
+        lbl.font = UIFont(name:"Ubuntu-Bold", size: 16)
+        return lbl
+    }()
     
     
     lazy var paragraph: NSMutableParagraphStyle =  {
@@ -27,17 +57,11 @@ class RequestViewingController: UIViewController, SelectDateDelegate {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
         setUpView()
     }
-    func createOptionView(imgName: String, lblTitle: String) -> UIView {
+    func createOptionView(imgName: String, lbl: UILabel) -> UIView {
         let v = UIView()
         let imgEl = UIImage(named:imgName)?.withRenderingMode(.alwaysTemplate)
         var imgE = UIImageView(image: imgEl!)
         imgE.tintColor = UIColor.init(hexString: "#1D82D6")
-        
-        let lbl = UILabel()
-        lbl.textColor = UIColor.init(hexString: "#1D82D6")
-        lbl.textAlignment = .left
-        lbl.font = UIFont(name:"Ubuntu-Bold", size: 14)
-        lbl.text = lblTitle
         
         let imgAdd = UIImage(named:"add")?.withRenderingMode(.alwaysTemplate)
         var imgA = UIImageView(image: imgAdd!)
@@ -87,21 +111,26 @@ class RequestViewingController: UIViewController, SelectDateDelegate {
         let attrText = NSMutableAttributedString()
         attrText.append(NSAttributedString(string:
                                             "By submitting a viewing request, you confirm that you\n" +
-                                            "are not currently engaged in a Buyer Representation\n" +
-                                            "Agreement or Customer Service Agreement with\n" +
-                                            "another Realtor or real estate brokerage."
+                                           "are not currently engaged in a Buyer Representation\n" +
+                                           "Agreement or Customer Service Agreement with\n" +
+                                           "another Realtor or real estate brokerage."
                                            ,attributes: attrLight as [NSAttributedString.Key : Any]))
         attrText.addAttribute(.paragraphStyle, value: paragraph, range: NSRange(location: 0, length: attrText.length))
         lblAgreement.attributedText = attrText
         //containers
         let optCon = UIView()
         optCon.backgroundColor = UIColor.init(hexString: "#e9ebed")
-        let dateCon = createOptionView(imgName: "calendar", lblTitle: "DATE")
+        dateFormatter.dateStyle = .long
+        lblDate.text = dateFormatter.string(from: date)
+        let dateCon = createOptionView(imgName: "calendar",lbl: lblDate)
         dateCon.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (datePick (_:))))
         
-        let timeCon = createOptionView(imgName: "time", lblTitle: "TIME")
-        let paxCon = createOptionView(imgName: "user", lblTitle: "PARTY COUNT(OPTIONAL)")
+        lblTime.text = "TIME"
+        let timeCon = createOptionView(imgName: "time", lbl: lblTime)
         
+        lblPax.text = "0 PAX"
+        let paxCon = createOptionView(imgName: "user", lbl: lblPax)
+        paxCon.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (paxPick (_:))))
        
         v.addSubview(lblRequest)
         lblRequest.anchor(
@@ -223,7 +252,7 @@ class RequestViewingController: UIViewController, SelectDateDelegate {
     func setUpView(){
         let height = navigationController?.navigationBar.frame.maxY
         navigationController?.navigationBar.isHidden = true
-        
+        view.backgroundColor =  UIColor.init(hexString: "#1D82D6")
         view.addSubview(topNav)
         topNav.anchor(
             top: view.topAnchor, left: view.leftAnchor,
@@ -253,6 +282,16 @@ class RequestViewingController: UIViewController, SelectDateDelegate {
         let vc =  DateSelectionController()
         vc.modalPresentationStyle = .formSheet
         vc.delegate = self
+        self.present(vc, animated: true)
+    }
+    @objc func timePick(_ sender:UITapGestureRecognizer){
+
+    }
+    @objc func paxPick(_ sender:UITapGestureRecognizer){
+        let vc =  PaxSelectionController()
+        vc.modalPresentationStyle = .custom
+        vc.delegate = self
+        vc.paxCount = paxCnt
         self.present(vc, animated: true)
     }
     @objc private func goBack(){

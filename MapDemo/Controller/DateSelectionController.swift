@@ -51,7 +51,7 @@ class DateSelectionController: UIViewController, FSCalendarDelegate  {
     }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "MMMM dd, yyyy"
         let result = formatter.string(from: date)
         delegate?.selectDate(date: result)
     }

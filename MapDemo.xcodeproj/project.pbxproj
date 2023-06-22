@@ -48,6 +48,8 @@
 		9FE6DBBC2A3CD180002BA940 /* ConfirmationViewingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBBB2A3CD180002BA940 /* ConfirmationViewingController.swift */; };
 		9FE6DBBE2A42BDF0002BA940 /* DateSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBBD2A42BDF0002BA940 /* DateSelectionController.swift */; };
 		9FE6DBC12A42C669002BA940 /* SelectDateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC02A42C669002BA940 /* SelectDateDelegate.swift */; };
+		9FE6DBC32A44207E002BA940 /* PaxSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC22A44207E002BA940 /* PaxSelectionController.swift */; };
+		9FE6DBC52A44215F002BA940 /* SelectPassengerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE6DBC42A44215F002BA940 /* SelectPassengerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -109,6 +111,8 @@
 		9FE6DBBB2A3CD180002BA940 /* ConfirmationViewingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewingController.swift; sourceTree = "<group>"; };
 		9FE6DBBD2A42BDF0002BA940 /* DateSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionController.swift; sourceTree = "<group>"; };
 		9FE6DBC02A42C669002BA940 /* SelectDateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateDelegate.swift; sourceTree = "<group>"; };
+		9FE6DBC22A44207E002BA940 /* PaxSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaxSelectionController.swift; sourceTree = "<group>"; };
+		9FE6DBC42A44215F002BA940 /* SelectPassengerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPassengerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +226,7 @@
 				9FE6DBB72A3CAC06002BA940 /* RequestViewingController.swift */,
 				9FE6DBBB2A3CD180002BA940 /* ConfirmationViewingController.swift */,
 				9FE6DBBD2A42BDF0002BA940 /* DateSelectionController.swift */,
+				9FE6DBC22A44207E002BA940 /* PaxSelectionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				9FE6DBC02A42C669002BA940 /* SelectDateDelegate.swift */,
+				9FE6DBC42A44215F002BA940 /* SelectPassengerDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				9F2CD56C29EEFE4D00239067 /* AppDelegate.swift in Sources */,
 				9FE6DBAE2A2A0114002BA940 /* BuildingDetailsController.swift in Sources */,
 				9FC62EC029FF6E640063ADD8 /* CalendarPageController.swift in Sources */,
+				9FE6DBC52A44215F002BA940 /* SelectPassengerDelegate.swift in Sources */,
 				9FE6DBAC2A2A00F5002BA940 /* BuildingDetails.swift in Sources */,
 				9FC62EC22A0831AF0063ADD8 /* MapSampleController.swift in Sources */,
 				9F2CD59729F4377A00239067 /* SearchModel.swift in Sources */,
@@ -404,6 +411,7 @@
 				9FE6DBA82A1C301A002BA940 /* LocationSearchController.swift in Sources */,
 				9F2CD5A329F44CA100239067 /* AgeInfoController.swift in Sources */,
 				9F2CD5A529F44FA000239067 /* Color.swift in Sources */,
+				9FE6DBC32A44207E002BA940 /* PaxSelectionController.swift in Sources */,
 				9FC62EC72A089BD70063ADD8 /* NeighbourhoodGeoJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
