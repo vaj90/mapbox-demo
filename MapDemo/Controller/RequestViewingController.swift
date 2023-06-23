@@ -12,7 +12,6 @@ class RequestViewingController: UIViewController, SelectDateDelegate, SelectPass
     var paxCnt: Int = 0
     var timeSelected: String!
     let date = Date()
-    let dateFormatter = DateFormatter()
     func selectDate(date: String) {
         print(date)
         dateSelected = date
@@ -126,12 +125,16 @@ class RequestViewingController: UIViewController, SelectDateDelegate, SelectPass
         //containers
         let optCon = UIView()
         optCon.backgroundColor = UIColor.init(hexString: "#e9ebed")
-        dateFormatter.dateStyle = .long
-        lblDate.text = dateFormatter.string(from: date)
+        let dF = DateFormatter()
+        dF.dateStyle = .long
+        lblDate.text = dF.string(from: date)
         let dateCon = createOptionView(imgName: "calendar",lbl: lblDate)
         dateCon.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (datePick (_:))))
         
-        lblTime.text = "TIME"
+        let tF = DateFormatter()
+        tF.dateFormat = "hh:mm a"
+        timeSelected = tF.string(from: date)
+        lblTime.text = timeSelected
         let timeCon = createOptionView(imgName: "time", lbl: lblTime)
         timeCon.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (timePick (_:))))
         
@@ -295,6 +298,7 @@ class RequestViewingController: UIViewController, SelectDateDelegate, SelectPass
         let vc =  TimeSelectionController()
         vc.modalPresentationStyle = .formSheet
         vc.delegate = self
+        vc.timePick = timeSelected
         self.present(vc, animated: true)
     }
     @objc func paxPick(_ sender:UITapGestureRecognizer){
