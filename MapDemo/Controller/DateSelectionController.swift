@@ -8,12 +8,15 @@
 import UIKit
 import FSCalendar
 
-class DateSelectionController: UIViewController, FSCalendarDelegate  {
+class DateSelectionController: UIViewController, FSCalendarDelegate, FSCalendarDelegateAppearance  {
     var delegate : SelectDateDelegate?
     var calendar: FSCalendar!
+    var datePick: String!
+    let dF = DateFormatter()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+        dF.dateFormat = "MMMM dd, yyyy"
         setUpView()
     }
     lazy var viewBody: UIView = {
@@ -27,6 +30,9 @@ class DateSelectionController: UIViewController, FSCalendarDelegate  {
             paddingBottom: 20, paddingRight: 20,
             width: v.frame.width, height: v.frame.height)
         calendar.delegate = self
+        if datePick != "" {
+            calendar.select(dF.date(from: datePick))
+        }
         v.layer.cornerRadius = 20
         v.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
         return v
@@ -50,12 +56,32 @@ class DateSelectionController: UIViewController, FSCalendarDelegate  {
         viewBody.layer.shadowRadius = 5
     }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM dd, yyyy"
-        let result = formatter.string(from: date)
+        let result = dF.string(from: date)
         delegate?.selectDate(date: result)
         self.dismiss(animated: true)
     }
-   
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        if date .compare(Date()) == .orderedAscending {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
+        let dateString = dF.string(from: date)
+
+        if datePick == dateString {
+            return UIColor.init(hexString: "#1D82D6")
+        }
+        
+        return appearance.selectionColor
+    }
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        if date .compare(Date()) == .orderedAscending {
+            return UIColor.init(hexString: "#e9ebed")
+        }
+        return appearance.titleDefaultColor
+    }
 }
 

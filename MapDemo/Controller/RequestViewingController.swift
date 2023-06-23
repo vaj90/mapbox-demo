@@ -127,7 +127,8 @@ class RequestViewingController: UIViewController, SelectDateDelegate, SelectPass
         optCon.backgroundColor = UIColor.init(hexString: "#e9ebed")
         let dF = DateFormatter()
         dF.dateStyle = .long
-        lblDate.text = dF.string(from: date)
+        dateSelected = dF.string(from: date)
+        lblDate.text = dateSelected
         let dateCon = createOptionView(imgName: "calendar",lbl: lblDate)
         dateCon.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (datePick (_:))))
         
@@ -292,6 +293,7 @@ class RequestViewingController: UIViewController, SelectDateDelegate, SelectPass
         let vc =  DateSelectionController()
         vc.modalPresentationStyle = .formSheet
         vc.delegate = self
+        vc.datePick = dateSelected
         self.present(vc, animated: true)
     }
     @objc func timePick(_ sender:UITapGestureRecognizer){
