@@ -367,7 +367,7 @@ extension MapSearchController: AnnotationInteractionDelegate {
                     let lng = center.longitude
                     let reCenter = CLLocationCoordinate2D(latitude: lat, longitude: lng)
                     let camOption = CameraOptions(center: reCenter, zoom: 12, pitch: 5)
-                    print("Latitude:\(lat) \nLongitude:\(lng)")
+                    print("Latitude:\(lat) Longitude:\(lng)")
                     centerCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
                     addMarker(at: centerCoordinate)
                     self.mapView.mapboxMap.setCamera(to: camOption)
@@ -375,7 +375,7 @@ extension MapSearchController: AnnotationInteractionDelegate {
                 if let userInfo = pAnnotation.userInfo {
                     let title: String = userInfo["title"] as! String
                     locationTitle.text = title
-                    print(title)
+                    //print(title)
                 }
             }
         }

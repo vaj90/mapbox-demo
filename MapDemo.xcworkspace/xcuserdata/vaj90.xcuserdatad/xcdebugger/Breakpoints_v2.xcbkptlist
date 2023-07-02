@@ -144,53 +144,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "88DB312B-DD2E-4907-8599-BFA10BF5DE9B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MapDemo/Controller/MapSearchController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
-            landmarkName = "addMarker(at:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "88DB312B-DD2E-4907-8599-BFA10BF5DE9B - cd709fc684442f9a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MapDemo.MapSearchController.addMarker(at: __C.CLLocationCoordinate2D) -&gt; ()"
-                  moduleName = "MapDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "341"
-                  endingLineNumber = "341"
-                  offsetFromSymbolStart = "741">
-               </Location>
-               <Location
-                  uuid = "88DB312B-DD2E-4907-8599-BFA10BF5DE9B - cd709fc684442f9a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MapDemo.MapSearchController.addMarker(at: __C.CLLocationCoordinate2D) -&gt; ()"
-                  moduleName = "MapDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaj90/workspace/ios/MapDemo/MapDemo/Controller/MapSearchController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "341"
-                  endingLineNumber = "341"
-                  offsetFromSymbolStart = "502">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
