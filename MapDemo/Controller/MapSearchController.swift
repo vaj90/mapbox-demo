@@ -278,13 +278,13 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
                             let coords = geo.geometry.coordinates.first
                             let identifier = "\(geo.properties.propertyID)"
                             var polygonAnnotation = createPolygon(id: identifier, coords: coords!)
-                            var lineAnnotation = createPolyline(id: identifier, coords: coords!)
+                            //var lineAnnotation = createPolyline(id: identifier, coords: coords!)
                             polygonAnnotation.userInfo = [
                                 "title": geo.properties.title,
                                 "description": geo.properties.description
                             ]
                             polygonAnnotations.append(polygonAnnotation)
-                            polylineAnnotations.append(lineAnnotation)
+                            //polylineAnnotations.append(lineAnnotation)
                             if firstGeo == nil {
                                 if let center = polygonAnnotation.polygon.center {
                                     let lat = center.latitude
@@ -295,7 +295,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
                         }
                     }
                     self.polygonAnnotationManager.annotations = polygonAnnotations
-                    self.polylineAnnotationManager.annotations = polylineAnnotations
+                    //self.polylineAnnotationManager.annotations = polylineAnnotations
                     if firstGeo != nil {
                         addMarker(at: firstGeo)
                         self.mapView.mapboxMap.setCamera(to: CameraOptions(center: firstGeo, zoom: 12, pitch: 5))
@@ -317,7 +317,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
         let ring = Ring(coordinates: ringCoords)
         let polygon = Polygon(outerRing: ring)
         var polygonAnnotation = PolygonAnnotation(id: id, polygon: polygon)
-        polygonAnnotation.fillOpacity = 0.4
+        polygonAnnotation.fillOpacity = 0.0
         polygonAnnotation.fillColor = StyleColor.init(UIColor.init(hexString: "#1D82D6"))
         return polygonAnnotation
     }
@@ -351,14 +351,14 @@ extension MapSearchController: AnnotationInteractionDelegate {
     public func annotationManager(_ manager: AnnotationManager, didDetectTappedAnnotations annotations: [Annotation]) {
         guard let tappedAnnotation = annotations.first else {return}
         DispatchQueue.main.async { [self] in
-            resetPolyline()
-            if let pManager = self.polylineAnnotationManager,
+            //resetPolyline()
+            /*if let pManager = self.polylineAnnotationManager,
                 let idx = pManager.annotations.firstIndex(where:  { $0.id == tappedAnnotation.id }) {
                 var annotation = pManager.annotations[idx]
                 annotation.lineOpacity = 1.0
                 annotation.lineWidth = 2
                 pManager.annotations[idx] = annotation
-            }
+            }*/
             if let polyManager = self.polygonAnnotationManager,
                 let selectedAnnotation = polyManager.annotations.firstIndex(where:  { $0.id == tappedAnnotation.id }) {
                 var pAnnotation = polyManager.annotations[selectedAnnotation]
