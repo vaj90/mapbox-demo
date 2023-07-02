@@ -18,6 +18,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
     var geoCoder = CLGeocoder()
     var centerCoordinate: CLLocationCoordinate2D!
     var polygonAnnotationManager: PolygonAnnotationManager!
+    var pointAnnotationManager: PointAnnotationManager!
     var polylineAnnotationManager: PolylineAnnotationManager!
     var resourceOptions = ResourceOptions(accessToken: "pk.eyJ1IjoiYmxvY2VzdGF0ZTEiLCJhIjoiY2xjeXd6aW40MDAwbzNxbzQ4a2xzMXQ2biJ9.wOAZ-fxbPhXhLouH7uFpcA")
     var neighbourhoodIds: [Int] = []
@@ -163,6 +164,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         polygonAnnotationManager = mapView.annotations.makePolygonAnnotationManager()
         polylineAnnotationManager = mapView.annotations.makePolylineAnnotationManager()
+        pointAnnotationManager = mapView.annotations.makePointAnnotationManager()
         polygonAnnotationManager.delegate = self
         polylineAnnotationManager.delegate = self
         v.addSubview(mapView)
@@ -335,7 +337,6 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
     func addMarker(at coordinate: CLLocationCoordinate2D) -> Void {
         var pointAnnotation = PointAnnotation(coordinate: coordinate)
         pointAnnotation.image = .init(image: UIImage(named: "marker")!, name: "marker")
-        let pointAnnotationManager = mapView.annotations.makePointAnnotationManager()
         pointAnnotationManager.annotations = [pointAnnotation]
     }
     //updating current coordinate.
@@ -365,6 +366,9 @@ extension MapSearchController: AnnotationInteractionDelegate {
                     let lng = center.longitude
                     let reCenter = CLLocationCoordinate2D(latitude: lat, longitude: lng)
                     let camOption = CameraOptions(center: reCenter, zoom: 12, pitch: 5)
+                    print("Latitude:\(lat) \nLongitude:\(lng)")
+                    centerCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+                    addMarker(at: centerCoordinate)
                     self.mapView.mapboxMap.setCamera(to: camOption)
                 }
                 if let userInfo = pAnnotation.userInfo {
@@ -375,6 +379,7 @@ extension MapSearchController: AnnotationInteractionDelegate {
             }
         }
     }
+    
     func resetPolyline(){
         let annotations = polylineAnnotationManager.annotations
         for annotation in annotations {
