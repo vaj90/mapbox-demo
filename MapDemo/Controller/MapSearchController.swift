@@ -297,6 +297,7 @@ class MapSearchController: UIViewController, CLLocationManagerDelegate, UIGestur
                     self.polygonAnnotationManager.annotations = polygonAnnotations
                     self.polylineAnnotationManager.annotations = polylineAnnotations
                     if firstGeo != nil {
+                        addMarker(at: firstGeo)
                         self.mapView.mapboxMap.setCamera(to: CameraOptions(center: firstGeo, zoom: 12, pitch: 5))
                     }
                     
