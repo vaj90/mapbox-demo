@@ -217,25 +217,25 @@ class MessageController: UIViewController {
         imgClip.anchor(
             top: v.topAnchor, left: v.leftAnchor,
             bottom: v.bottomAnchor, right: nil,
-            paddingTop: 15, paddingLeft: 20,
-            paddingBottom: 15, paddingRight: 15,
-            width: 32, height: 32)
+            paddingTop: 17, paddingLeft: 20,
+            paddingBottom: 17, paddingRight: 15,
+            width: 30, height: 25)
         
         v.addSubview(imgCamera)
         imgCamera.anchor(
             top: v.topAnchor, left: imgClip.rightAnchor,
             bottom: v.bottomAnchor, right: nil,
-            paddingTop: 15, paddingLeft: 15,
-            paddingBottom: 15, paddingRight: 15,
-            width: 32, height: 32)
+            paddingTop: 17, paddingLeft: 15,
+            paddingBottom: 17, paddingRight: 15,
+            width: 30, height: 25)
         
         v.addSubview(imgSend)
         imgSend.anchor(
             top: v.topAnchor, left: nil,
             bottom: v.bottomAnchor, right: v.rightAnchor,
-            paddingTop: 15, paddingLeft: 15,
-            paddingBottom: 15, paddingRight: 20,
-            width: 32, height: 32)
+            paddingTop: 17, paddingLeft: 15,
+            paddingBottom: 17, paddingRight: 20,
+            width: 30, height: 25)
         
         v.addSubview(txtMessage)
         txtMessage.anchor(
