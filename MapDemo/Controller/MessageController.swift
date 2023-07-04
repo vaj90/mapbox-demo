@@ -197,20 +197,49 @@ class MessageController: UIViewController {
         
         let imgs = UIImage(named:"send")?.withRenderingMode(.alwaysTemplate)
         var imgSend = UIImageView(image: imgs!)
-        imgSend.tintColor = UIColor.init(hexString: "#15A9FC")
+        imgSend.tintColor = UIColor.init(hexString: "#CFCFCF")
         imgSend.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(send)))
         imgSend.isUserInteractionEnabled = true
+        
+        let imgcl = UIImage(named:"clip")?.withRenderingMode(.alwaysTemplate)
+        var imgClip = UIImageView(image: imgcl!)
+        imgClip.tintColor = UIColor.init(hexString: "#CFCFCF")
+        imgClip.addGestureRecognizer(UITapGestureRecognizer(target: self, action:#selector(attachedFile)))
+        imgClip.isUserInteractionEnabled = true
+        
+        let imgca = UIImage(named:"camera")?.withRenderingMode(.alwaysTemplate)
+        var imgCamera = UIImageView(image: imgca!)
+        imgCamera.tintColor = UIColor.init(hexString: "#C9C9C9")
+        imgCamera.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addImage)))
+        imgCamera.isUserInteractionEnabled = true
+        
+        v.addSubview(imgClip)
+        imgClip.anchor(
+            top: v.topAnchor, left: v.leftAnchor,
+            bottom: v.bottomAnchor, right: nil,
+            paddingTop: 15, paddingLeft: 20,
+            paddingBottom: 15, paddingRight: 15,
+            width: 32, height: 32)
+        
+        v.addSubview(imgCamera)
+        imgCamera.anchor(
+            top: v.topAnchor, left: imgClip.rightAnchor,
+            bottom: v.bottomAnchor, right: nil,
+            paddingTop: 15, paddingLeft: 15,
+            paddingBottom: 15, paddingRight: 15,
+            width: 32, height: 32)
+        
         v.addSubview(imgSend)
         imgSend.anchor(
             top: v.topAnchor, left: nil,
             bottom: v.bottomAnchor, right: v.rightAnchor,
-            paddingTop: 15, paddingLeft: 0,
-            paddingBottom: 15, paddingRight: 15,
+            paddingTop: 15, paddingLeft: 15,
+            paddingBottom: 15, paddingRight: 20,
             width: 32, height: 32)
         
         v.addSubview(txtMessage)
         txtMessage.anchor(
-            top: v.topAnchor, left: v.leftAnchor,
+            top: v.topAnchor, left: imgCamera.rightAnchor,
             bottom: v.bottomAnchor, right: imgSend.leftAnchor,
             paddingTop: 15, paddingLeft: 15,
             paddingBottom: 15, paddingRight: 15,
@@ -265,6 +294,12 @@ class MessageController: UIViewController {
     }
     @objc private func send(){
         print("send")
+    }
+    @objc private func attachedFile(){
+        print("file")
+    }
+    @objc private func addImage(){
+        print("image")
     }
  
 }
