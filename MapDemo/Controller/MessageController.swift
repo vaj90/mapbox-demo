@@ -188,6 +188,8 @@ class MessageController: UIViewController, UITextFieldDelegate {
         t.layer.borderWidth = 1.0
         t.layer.borderColor = UIColor.gray.cgColor
         t.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: t.frame.height))
+        t.setLeftPaddingPoints(10)
+        t.setRightPaddingPoints(10)
         //t.leftViewMode = .always
         return t
     }()
