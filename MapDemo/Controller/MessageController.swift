@@ -287,7 +287,7 @@ class MessageController: UIViewController {
             bottom: v.bottomAnchor, right: imgSend.leftAnchor,
             paddingTop: 15, paddingLeft: 10,
             paddingBottom: 15, paddingRight: 15,
-            width: 0, height: 40)
+            width: 0, height: 35)
         
         
         activeOptionConstraints.append(innerView.widthAnchor.constraint(equalToConstant: 100))
@@ -351,7 +351,7 @@ class MessageController: UIViewController {
             NSLayoutConstraint.activate(unActiveOptionConstraints)
             NSLayoutConstraint.deactivate(activeOptionConstraints)
         }
-        
+
         innerView.updateConstraints()
         innerView.layoutIfNeeded()
         isHidden = !isHidden
