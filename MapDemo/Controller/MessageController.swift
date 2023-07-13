@@ -84,7 +84,7 @@ class MessageCollectionViewCell : UICollectionViewCell {
     }
 
 }
-class MessageController: UIViewController, UITextFieldDelegate {
+class MessageController: UIViewController {
     var cV: UICollectionView!
     var messages: [Message] = [
         Message(name: "Allan", messageInfo: "Thank you for ordering from Oh My Gulay!. We're currently preparing your order.", msgType: 1, dateTime: "01/30/2023 11:48 PM"),
@@ -108,7 +108,7 @@ class MessageController: UIViewController, UITextFieldDelegate {
         cV.dataSource = self
         cV.delegate = self
         cV.register(MessageCollectionViewCell.self, forCellWithReuseIdentifier: MessageCollectionViewCell.identifier)
-        //collectionview.showsHorizontalScrollIndicator = false
+        txtMessage.delegate = self
     }
     lazy var viewBody: UIView = {
         let v  = UIView()
@@ -181,20 +181,25 @@ class MessageController: UIViewController, UITextFieldDelegate {
 
         return v
     }()
-    lazy var txtMessage: UITextField = {
-        let t = UITextField()
-        t.placeholder = "Type your message here..."
+    lazy var txtMessage: UITextView = {
+        let t = UITextView()
+        t.text = "Type your message here..."
         t.layer.cornerRadius = 10
         t.layer.borderWidth = 1.0
         t.layer.borderColor = UIColor.gray.cgColor
-        t.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: t.frame.height))
-        t.setLeftPaddingPoints(10)
-        t.setRightPaddingPoints(10)
+        t.font = UIFont(name: "Ubuntu-Light", size: 14)
+        t.contentSize.height = minHeight
+        //t.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: t.frame.height))
+        //t.setLeftPaddingPoints(10)
+        //t.setRightPaddingPoints(10)
         //t.leftViewMode = .always
         return t
     }()
+    private let maxHeight: CGFloat = 100
+    private let minHeight: CGFloat = 33
     var activeOptionConstraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
     var unActiveOptionConstraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
+    var bConstraint: NSLayoutConstraint = NSLayoutConstraint()
     let imglc = UIImage(named:"lchevron")?.withRenderingMode(.alwaysTemplate)
     let imgrc = UIImage(named:"rchevron")?.withRenderingMode(.alwaysTemplate)
     var isHidden = false
@@ -226,27 +231,27 @@ class MessageController: UIViewController, UITextFieldDelegate {
         iv.addSubview(imgShowHide)
         imgShowHide.anchor(
             top: iv.topAnchor, left: iv.leftAnchor,
-            bottom: iv.bottomAnchor, right: nil,
-            paddingTop: 17, paddingLeft: 0,
-            paddingBottom: 17, paddingRight: 10,
-            width: 30, height: 25)
+            bottom: nil, right: nil,
+            paddingTop: 15, paddingLeft: 0,
+            paddingBottom: 0, paddingRight: 10,
+            width: 25, height: 25)
         
         iv.addSubview(imgClip)
         imgClip.anchor(
             top: iv.topAnchor, left: imgShowHide.rightAnchor,
-            bottom: iv.bottomAnchor, right: nil,
-            paddingTop: 17, paddingLeft: 10,
-            paddingBottom: 17, paddingRight: 10,
-            width: 30, height: 25)
+            bottom: nil, right: nil,
+            paddingTop: 15, paddingLeft: 10,
+            paddingBottom: 0, paddingRight: 10,
+            width: 25, height: 25)
         imgClip.isHidden = isHidden
         
         iv.addSubview(imgCamera)
         imgCamera.anchor(
             top: iv.topAnchor, left: imgClip.rightAnchor,
-            bottom: iv.bottomAnchor, right: nil,
-            paddingTop: 17, paddingLeft: 10,
-            paddingBottom: 17, paddingRight: 0,
-            width: 30, height: 25)
+            bottom: nil, right: nil,
+            paddingTop: 15, paddingLeft: 10,
+            paddingBottom: 0, paddingRight: 0,
+            width: 25, height: 25)
         imgCamera.isHidden = isHidden
         
         return iv
@@ -271,10 +276,10 @@ class MessageController: UIViewController, UITextFieldDelegate {
         v.addSubview(imgSend)
         imgSend.anchor(
             top: v.topAnchor, left: nil,
-            bottom: v.bottomAnchor, right: v.rightAnchor,
-            paddingTop: 17, paddingLeft: 15,
-            paddingBottom: 17, paddingRight: 15,
-            width: 30, height: 25)
+            bottom: nil, right: v.rightAnchor,
+            paddingTop: 15, paddingLeft: 15,
+            paddingBottom: 0, paddingRight: 15,
+            width: 25, height: 25)
         
         v.addSubview(txtMessage)
         txtMessage.anchor(
@@ -284,8 +289,9 @@ class MessageController: UIViewController, UITextFieldDelegate {
             paddingBottom: 15, paddingRight: 15,
             width: 0, height: 40)
         
-        activeOptionConstraints.append(innerView.widthAnchor.constraint(equalToConstant: 120))
-        unActiveOptionConstraints.append(innerView.widthAnchor.constraint(equalToConstant: 30))
+        
+        activeOptionConstraints.append(innerView.widthAnchor.constraint(equalToConstant: 100))
+        unActiveOptionConstraints.append(innerView.widthAnchor.constraint(equalToConstant: 25))
         showOtherBtn()
         return v
     }()
@@ -313,12 +319,13 @@ class MessageController: UIViewController, UITextFieldDelegate {
             bottom: view.bottomAnchor, right: view.rightAnchor,
             paddingTop: 10, paddingLeft: 0,
             paddingBottom: 10, paddingRight: 0,
-            width: 0, height: 65)
+            width: 0, height: 0)
         let borderBotNav: CALayer = CALayer()
         borderBotNav.frame = CGRectMake(0.0, 0.0, view.frame.size.width, 0.5)
         borderBotNav.backgroundColor = UIColor.lightGray.cgColor
         bottomNav.layer.addSublayer(borderBotNav)
-        
+        bConstraint = bottomNav.heightAnchor.constraint(equalToConstant: 100)
+        bConstraint.isActive = false
         
         view.addSubview(viewBody)
         viewBody.anchor(
@@ -344,7 +351,7 @@ class MessageController: UIViewController, UITextFieldDelegate {
             NSLayoutConstraint.activate(unActiveOptionConstraints)
             NSLayoutConstraint.deactivate(activeOptionConstraints)
         }
-            
+        
         innerView.updateConstraints()
         innerView.layoutIfNeeded()
         isHidden = !isHidden
@@ -368,7 +375,7 @@ class MessageController: UIViewController, UITextFieldDelegate {
  
 }
 
-extension MessageController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MessageController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
@@ -395,5 +402,27 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
         let estimatedFrame = NSString(string: msg.messageInfo).boundingRect(with: size,options: .usesLineFragmentOrigin, context: nil)
         return CGSize(width: approximateWidth, height: estimatedFrame.height + 70)
     }
-     
+
+
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.contentSize.height > minHeight {
+            if !isHidden {
+                NSLayoutConstraint.activate(unActiveOptionConstraints)
+                NSLayoutConstraint.deactivate(activeOptionConstraints)
+                innerView.updateConstraints()
+                innerView.layoutIfNeeded()
+                isHidden = !isHidden
+            }
+            else{
+                bConstraint.isActive = true
+            }
+        }
+        else{
+            bConstraint.isActive = false
+        }
+        self.bottomNav.updateConstraints()
+        self.bottomNav.layoutIfNeeded()
+        
+
+    }
 }
